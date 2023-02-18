@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'colors.dart';
+
 ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
   textTheme: TextTheme(
@@ -7,22 +9,33 @@ ThemeData lightTheme = ThemeData(
     labelMedium: labelMedium,
     labelSmall: labelSmall,
   ),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: buttonStyle,
+  ),
 );
 
-TextStyle labelLarge = const TextStyle(
-  color: Colors.white,
+TextStyle labelLarge = TextStyle(
+  color: lightColor,
   fontWeight: FontWeight.bold,
   fontSize: 50.0,
 );
 
-TextStyle labelMedium = const TextStyle(
-  color: Colors.white,
+TextStyle labelMedium = TextStyle(
+  color: lightColor,
   fontWeight: FontWeight.bold,
   fontSize: 40.0,
 );
 
-TextStyle labelSmall = const TextStyle(
-  color: Colors.white,
+TextStyle labelSmall = TextStyle(
+  color: lightColor,
   fontWeight: FontWeight.bold,
   fontSize: 30.0,
+);
+
+ButtonStyle buttonStyle = ElevatedButton.styleFrom(
+  backgroundColor: primaryColor,
+  minimumSize: const Size.fromHeight(50.0),
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(50.0),
+  ),
 );

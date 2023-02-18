@@ -1,6 +1,8 @@
-import 'package:alias/resources/colors.dart';
-import 'package:alias/resources/theme.dart';
 import 'package:flutter/material.dart';
+
+import 'resources/colors.dart';
+import 'resources/theme.dart';
+import 'views/home/home_screen.dart';
 
 void main() {
   runApp(const AliasApp());
@@ -14,7 +16,7 @@ class AliasApp extends StatelessWidget {
     return MaterialApp(
       theme: lightTheme,
       themeMode: ThemeMode.light,
-      home: const App(),
+      home: const HomeScreen(),
     );
   }
 }
