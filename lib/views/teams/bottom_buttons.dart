@@ -23,7 +23,18 @@ class BottomButtons extends StatelessWidget {
         const SizedBox(width: 15.0),
         CustomButton(
           text: 'Continue',
-          onPressedFunc: () {},
+          onPressedFunc: () {
+            bool isValid = Provider.of<TeamViewModel>(context, listen: false)
+                .isTeamsValid();
+            if (!isValid) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  duration: Duration(seconds: 1),
+                  content: Text('Please fill all teams name'),
+                ),
+              );
+            }
+          },
         ),
       ],
     );

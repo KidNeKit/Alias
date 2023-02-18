@@ -15,7 +15,7 @@ class TeamsListView extends StatelessWidget {
           return ListView.separated(
             itemCount: value.teamQuantity,
             separatorBuilder: (context, index) => const SizedBox(height: 5.0),
-            itemBuilder: (context, index) => const TeamItem(),
+            itemBuilder: (context, index) => TeamItem(position: index),
           );
         },
       ),
