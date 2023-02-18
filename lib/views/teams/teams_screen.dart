@@ -1,4 +1,5 @@
 import 'package:alias/views/teams/bottom_buttons.dart';
+import 'package:alias/views/teams/teams_settings/teams_settings.dart';
 import 'package:flutter/material.dart';
 
 import '../../resources/colors.dart';
@@ -22,6 +23,8 @@ class TeamScreen extends StatelessWidget {
                 'Select team quantity',
                 style: Theme.of(context).textTheme.labelSmall,
               ),
+              const SizedBox(height: 10.0),
+              const TeamsSettings(),
               const SizedBox(height: 10.0),
               const TeamsListView(),
               const BottomButtons(),

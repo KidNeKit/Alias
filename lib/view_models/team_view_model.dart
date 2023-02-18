@@ -10,4 +10,18 @@ class TeamViewModel with ChangeNotifier {
   ];
 
   int get teamQuantity => _teams.length;
+
+  void addTeam() {
+    if (teamQuantity < 4) {
+      _teams.add(Team.initial());
+      notifyListeners();
+    }
+  }
+
+  void removeTeam() {
+    if (teamQuantity > 2) {
+      _teams.removeLast();
+      notifyListeners();
+    }
+  }
 }
