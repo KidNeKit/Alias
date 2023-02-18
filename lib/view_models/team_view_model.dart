@@ -11,6 +11,12 @@ class TeamViewModel with ChangeNotifier {
 
   int get teamQuantity => _teams.length;
 
+  void resetData() {
+    _teams
+      ..clear()
+      ..addAll([Team.initial(), Team.initial()]);
+  }
+
   void addTeam() {
     if (teamQuantity < 4) {
       _teams.add(Team.initial());
