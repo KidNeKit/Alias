@@ -1,3 +1,4 @@
+import 'package:alias/views/teams/bottom_buttons.dart';
 import 'package:flutter/material.dart';
 
 import '../../resources/colors.dart';
@@ -23,6 +24,7 @@ class TeamScreen extends StatelessWidget {
               ),
               const SizedBox(height: 10.0),
               const TeamsListView(),
+              const BottomButtons(),
             ],
           ),
         ),
