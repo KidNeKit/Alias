@@ -1,3 +1,4 @@
+import 'package:alias/views/teams/teams_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../resources/colors.dart';
@@ -24,7 +25,8 @@ class HomeScreen extends StatelessWidget {
               ),
               const SizedBox(height: 15.0),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () =>
+                    Navigator.of(context).pushNamed(TeamScreen.routeName),
                 child: Text(
                   'Start',
                   style: Theme.of(context).textTheme.labelSmall,
