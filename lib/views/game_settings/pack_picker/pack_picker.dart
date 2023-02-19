@@ -1,4 +1,6 @@
+import 'package:alias/view_models/pack_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../resources/colors.dart';
 import '../../pack/pack_screen.dart';
@@ -12,20 +14,28 @@ class PackPicker extends StatelessWidget {
       onTap: () {
         Navigator.of(context).pushNamed(PackScreen.routeName);
       },
-      child: Container(
-        height: 50,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.0),
-          color: accentColor,
-        ),
-        child: Center(
-          child: Text(
-            'Select pack',
-            style: Theme.of(context).textTheme.labelSmall,
+      child: Consumer<PackViewModel>(builder: (context, value, child) {
+        bool isPackSelected = value.selectedPack != null;
+        return Center(
+          child: Container(
+            height: 50,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10.0),
+              color: primaryColor,
+              border: isPackSelected
+                  ? Border.all(color: Colors.amber, width: 2.0)
+                  : null,
+            ),
+            child: Center(
+              child: Text(
+                isPackSelected ? value.selectedPack!.name : 'Select pack',
+                style: Theme.of(context).textTheme.labelSmall,
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      }),
     );
   }
 }
