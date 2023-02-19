@@ -6,10 +6,15 @@ import '../../../resources/colors.dart';
 class ComplexityItem extends StatelessWidget {
   final DifficultyLevel _level;
   final bool _isAvailable;
+  final bool _isSelected;
   const ComplexityItem(
-      {required DifficultyLevel level, required bool isAvailable, super.key})
+      {required DifficultyLevel level,
+      required bool isAvailable,
+      required bool isSelected,
+      super.key})
       : _level = level,
-        _isAvailable = isAvailable;
+        _isAvailable = isAvailable,
+        _isSelected = isSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +25,11 @@ class ComplexityItem extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
         color: _isAvailable ? primaryColor : darkColor,
-        border:
-            _isAvailable ? null : Border.all(color: primaryColor, width: 2.0),
+        border: _isSelected
+            ? Border.all(color: Colors.amber, width: 2.0)
+            : _isAvailable
+                ? null
+                : Border.all(color: primaryColor, width: 2.0),
       ),
       child: Center(
         child: Text(

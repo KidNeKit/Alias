@@ -1,6 +1,7 @@
-import 'package:alias/models/enums/win_points.dart';
-import 'package:alias/resources/colors.dart';
 import 'package:flutter/material.dart';
+
+import '../../../models/enums/win_points.dart';
+import '../../../resources/colors.dart';
 
 class WinPointItem extends StatelessWidget {
   final WinPoints _winPoint;
@@ -17,13 +18,13 @@ class WinPointItem extends StatelessWidget {
       padding: const EdgeInsets.all(5.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
-        color: _isSelected ? primaryColor : darkColor,
+        color: primaryColor,
         border: _isSelected
-            ? null
-            : Border.all(
-                color: primaryColor,
+            ? Border.all(
+                color: Colors.amber,
                 width: 2.0,
-              ),
+              )
+            : null,
       ),
       child: Align(
         alignment: Alignment.center,
