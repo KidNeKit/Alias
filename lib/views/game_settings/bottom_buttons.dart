@@ -16,7 +16,6 @@ class BottomButtons extends StatelessWidget {
           builder: (context, value, child) => CustomButton(
             text: 'Back',
             onPressedFunc: () {
-              value.resetData();
               Navigator.of(context).pop();
             },
           ),
@@ -24,20 +23,7 @@ class BottomButtons extends StatelessWidget {
         const SizedBox(width: 15.0),
         CustomButton(
           text: 'Continue',
-          onPressedFunc: () {
-            bool isValid = Provider.of<TeamViewModel>(context, listen: false)
-                .isTeamsValid();
-            if (!isValid) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  duration: Duration(seconds: 1),
-                  content: Text('Please fill all teams name'),
-                ),
-              );
-            } else {
-              Navigator.of(context).pushNamed(GameSettingsScreen.routeName);
-            }
-          },
+          onPressedFunc: () {},
         ),
       ],
     );
