@@ -5,6 +5,7 @@ import 'resources/theme.dart';
 import 'view_models/team_view_model.dart';
 import 'views/game_settings/game_settings_screen.dart';
 import 'views/home/home_screen.dart';
+import 'views/pack/pack_screen.dart';
 import 'views/teams/teams_screen.dart';
 
 void main() {
@@ -29,6 +30,7 @@ class AliasApp extends StatelessWidget {
         routes: {
           TeamScreen.routeName: (context) => const TeamScreen(),
           GameSettingsScreen.routeName: (context) => const GameSettingsScreen(),
+          PackScreen.routeName: (context) => const PackScreen(),
         },
       ),
     );

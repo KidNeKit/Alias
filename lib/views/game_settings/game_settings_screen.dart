@@ -1,7 +1,9 @@
-import 'package:alias/resources/colors.dart';
-import 'package:alias/views/game_settings/bottom_buttons.dart';
-import 'package:alias/views/game_settings/win_points_selector/win_points_selector.dart';
 import 'package:flutter/material.dart';
+
+import '../../resources/colors.dart';
+import 'bottom_buttons.dart';
+import 'pack_picker/pack_picker.dart';
+import 'win_points_selector/win_points_selector.dart';
 
 class GameSettingsScreen extends StatelessWidget {
   static const String routeName = '/game_settings_screen';
@@ -21,6 +23,8 @@ class GameSettingsScreen extends StatelessWidget {
                 'Pick your pack',
                 style: Theme.of(context).textTheme.labelSmall,
               ),
+              const SizedBox(height: 10.0),
+              const PackPicker(),
               const SizedBox(height: 10.0),
               Text(
                 'Choose points for win',
