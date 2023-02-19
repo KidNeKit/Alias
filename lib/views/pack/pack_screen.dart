@@ -20,7 +20,7 @@ class PackScreen extends StatelessWidget {
             children: [
               Text(
                 'Packs catalogue',
-                style: Theme.of(context).textTheme.labelSmall,
+                style: Theme.of(context).textTheme.labelMedium,
               ),
               const SizedBox(height: 10.0),
               const PacksListView(),

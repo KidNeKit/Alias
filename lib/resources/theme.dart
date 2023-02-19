@@ -17,19 +17,19 @@ ThemeData lightTheme = ThemeData(
 TextStyle labelLarge = TextStyle(
   color: lightColor,
   fontWeight: FontWeight.bold,
-  fontSize: 50.0,
+  fontSize: 40.0,
 );
 
 TextStyle labelMedium = TextStyle(
   color: lightColor,
   fontWeight: FontWeight.bold,
-  fontSize: 40.0,
+  fontSize: 30.0,
 );
 
 TextStyle labelSmall = TextStyle(
   color: lightColor,
   fontWeight: FontWeight.bold,
-  fontSize: 30.0,
+  fontSize: 20.0,
 );
 
 ButtonStyle buttonStyle = ElevatedButton.styleFrom(

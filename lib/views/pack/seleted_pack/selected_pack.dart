@@ -18,12 +18,33 @@ class SelectedPack extends StatelessWidget {
           borderRadius: BorderRadius.circular(10.0),
           border: Border.all(color: primaryColor),
         ),
-        child: Center(
-          child: value.selectedPack == null
-              ? const Text(
-                  'There is nothing selected yet',
-                )
-              : Text(value.selectedPack!.name),
+        child: Stack(
+          children: [
+            Center(
+              child: Text(
+                value.selectedPack == null
+                    ? 'There is nothing selected yet'
+                    : value.selectedPack!.name,
+                style: Theme.of(context).textTheme.labelSmall,
+              ),
+            ),
+            Positioned(
+              top: 0,
+              right: 0,
+              child: Visibility(
+                visible: value.selectedPack != null,
+                child: GestureDetector(
+                  onTap: () {
+                    value.clearSelectedPack();
+                  },
+                  child: const Icon(
+                    Icons.cancel_rounded,
+                    color: Colors.red,
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
