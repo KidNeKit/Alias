@@ -1,4 +1,5 @@
 import 'package:alias/resources/colors.dart';
+import 'package:alias/view_models/game_view_model.dart';
 import 'package:alias/view_models/pack_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -36,6 +37,8 @@ class SelectedPack extends StatelessWidget {
                 child: GestureDetector(
                   onTap: () {
                     value.clearSelectedPack();
+                    Provider.of<GameViewModel>(context, listen: false)
+                        .clearPack();
                   },
                   child: const Icon(
                     Icons.cancel_rounded,

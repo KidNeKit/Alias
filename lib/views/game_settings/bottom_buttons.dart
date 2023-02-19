@@ -1,3 +1,5 @@
+import 'package:alias/view_models/game_view_model.dart';
+import 'package:alias/view_models/pack_view_model.dart';
 import 'package:alias/view_models/team_view_model.dart';
 import 'package:alias/views/game_settings/game_settings_screen.dart';
 import 'package:flutter/material.dart';
@@ -10,22 +12,34 @@ class BottomButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Consumer<TeamViewModel>(
-          builder: (context, value, child) => CustomButton(
+    return Consumer<GameViewModel>(
+      builder: (context, value, child) => Row(
+        children: [
+          CustomButton(
             text: 'Back',
             onPressedFunc: () {
+              value.clearGameData();
+              Provider.of<PackViewModel>(context, listen: false)
+                  .clearSelectedPack();
               Navigator.of(context).pop();
             },
           ),
-        ),
-        const SizedBox(width: 15.0),
-        CustomButton(
-          text: 'Continue',
-          onPressedFunc: () {},
-        ),
-      ],
+          const SizedBox(width: 15.0),
+          CustomButton(
+            text: 'Continue',
+            onPressedFunc: () {
+              if (!value.isDataValid()) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    duration: Duration(seconds: 1),
+                    content: Text('Please select all fields'),
+                  ),
+                );
+              }
+            },
+          ),
+        ],
+      ),
     );
   }
 }

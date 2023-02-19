@@ -1,3 +1,4 @@
+import 'package:alias/view_models/game_view_model.dart';
 import 'package:alias/views/pack/packs_listview/pack_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -41,6 +42,8 @@ class _PacksListViewState extends State<PacksListView> {
                 itemBuilder: (context, index) => GestureDetector(
                   onTap: () {
                     value.setSelectedPack = value.packs[index];
+                    Provider.of<GameViewModel>(context, listen: false).setPack =
+                        value.packs[index];
                   },
                   child: PackItem(
                     packName: value.packs[index].name,
