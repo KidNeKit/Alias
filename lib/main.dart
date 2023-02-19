@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'resources/theme.dart';
+import 'view_models/game_view_model.dart';
 import 'view_models/pack_view_model.dart';
 import 'view_models/team_view_model.dart';
 import 'views/game_settings/game_settings_screen.dart';
@@ -25,6 +26,9 @@ class AliasApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<PackViewModel>(
           create: (context) => PackViewModel(),
+        ),
+        ChangeNotifierProvider<GameViewModel>(
+          create: (context) => GameViewModel(),
         ),
       ],
       child: MaterialApp(
