@@ -1,3 +1,4 @@
+import 'package:alias/views/pack/seleted_pack/selected_pack.dart';
 import 'package:flutter/material.dart';
 
 import '../../resources/colors.dart';
@@ -18,11 +19,21 @@ class PackScreen extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                'Packs',
+                'Packs catalogue',
                 style: Theme.of(context).textTheme.labelSmall,
               ),
               const SizedBox(height: 10.0),
               const PacksListView(),
+              const SizedBox(height: 10.0),
+              const SelectedPack(),
+              const SizedBox(height: 10.0),
+              ElevatedButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: Text(
+                  'Back',
+                  style: Theme.of(context).textTheme.labelSmall,
+                ),
+              ),
             ],
           ),
         ),

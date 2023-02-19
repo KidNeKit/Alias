@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 
 class PackItem extends StatelessWidget {
   final String _packName;
-  const PackItem({required String packName, super.key}) : _packName = packName;
+  final bool _isSelected;
+  const PackItem(
+      {required String packName, required bool isSelected, super.key})
+      : _packName = packName,
+        _isSelected = isSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +17,8 @@ class PackItem extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
         color: primaryColor,
+        border:
+            _isSelected ? Border.all(color: Colors.amber, width: 2.0) : null,
       ),
       child: Center(
         child: Text(

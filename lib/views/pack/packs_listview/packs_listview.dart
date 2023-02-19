@@ -38,8 +38,16 @@ class _PacksListViewState extends State<PacksListView> {
                 itemCount: value.packs.length,
                 separatorBuilder: (context, index) =>
                     const SizedBox(height: 5.0),
-                itemBuilder: (context, index) =>
-                    PackItem(packName: value.packs[index].name),
+                itemBuilder: (context, index) => GestureDetector(
+                  onTap: () {
+                    value.setSelectedPack = value.packs[index];
+                  },
+                  child: PackItem(
+                    packName: value.packs[index].name,
+                    isSelected:
+                        value.packs[index].name == value.selectedPack?.name,
+                  ),
+                ),
               ),
       );
     });
