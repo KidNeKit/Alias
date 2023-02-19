@@ -1,23 +1,32 @@
-import 'enums/difficulty_level.dart';
+import 'complexity.dart';
 
 class Pack {
-  final String _id;
+  //final String _id;
   final String _name;
-  final DifficultyLevel _level;
-  final Set<String> _words;
+  final Set<Complexity> _levels;
 
   Pack(
-      {required String id,
+      { //required String id,
       required String name,
-      required DifficultyLevel level,
-      required Set<String> words})
-      : _id = id,
+      required Set<Complexity> levels})
+      : //_id = id,
         _name = name,
-        _level = level,
-        _words = words;
+        _levels = levels;
 
-  String get id => _id;
+  //String get id => _id;
   String get name => _name;
-  DifficultyLevel get level => _level;
-  Set<String> get words => _words;
+  Set<Complexity> get levels => _levels;
+
+  static Pack fromJson(Map<String, dynamic> json) {
+    return Pack(
+        name: json['packName'],
+        levels: (json['levels'] as List)
+            .map((e) => Complexity.fromJson(e))
+            .toSet());
+  }
+
+  @override
+  String toString() {
+    return 'name: $_name, levels: $_levels';
+  }
 }

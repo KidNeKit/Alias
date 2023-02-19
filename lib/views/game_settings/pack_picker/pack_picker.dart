@@ -9,13 +9,21 @@ class PackPicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.of(context).pushNamed(PackScreen.routeName),
+      onTap: () {
+        Navigator.of(context).pushNamed(PackScreen.routeName);
+      },
       child: Container(
         height: 50,
         width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.0),
           color: accentColor,
+        ),
+        child: Center(
+          child: Text(
+            'Select pack',
+            style: Theme.of(context).textTheme.labelSmall,
+          ),
         ),
       ),
     );

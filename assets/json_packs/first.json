@@ -1,0 +1,24 @@
+{
+    "packName": "First Pack",
+    "levels": [
+        {
+            "level": "easy",
+            "words": [
+                "skibidi",
+                "wapapa"
+            ]
+        },
+        {
+            "level": "medium",
+            "words": [
+                "chupapi"
+            ]
+        },
+        {
+            "level": "hard",
+            "words": [
+                "munanyo"
+            ]
+        }
+    ]
+}
