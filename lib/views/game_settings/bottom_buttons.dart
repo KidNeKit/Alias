@@ -1,11 +1,10 @@
-import 'package:alias/view_models/game_view_model.dart';
-import 'package:alias/view_models/pack_view_model.dart';
-import 'package:alias/view_models/team_view_model.dart';
-import 'package:alias/views/game_settings/game_settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../view_models/game_view_model.dart';
+import '../../view_models/pack_view_model.dart';
 import '../components/custom_button.dart';
+import '../lobby/lobby_screen.dart';
 
 class BottomButtons extends StatelessWidget {
   const BottomButtons({super.key});
@@ -35,6 +34,8 @@ class BottomButtons extends StatelessWidget {
                     content: Text('Please select all fields'),
                   ),
                 );
+              } else {
+                Navigator.of(context).pushNamed(LobbyScreen.routeName);
               }
             },
           ),
