@@ -11,6 +11,9 @@ class GameViewModel with ChangeNotifier {
   WinPoints? _winPoints;
   Pack? _selectedPack;
   DifficultyLevel? _level;
+  int _turn = 1;
+  bool _isGameStarted = false;
+  int _playingTeamIndex = 0;
   final List<Team> _teams = [
     Team.initial(),
     Team.initial(),
@@ -20,6 +23,10 @@ class GameViewModel with ChangeNotifier {
   DifficultyLevel? get level => _level;
   int get teamQuantity => _teams.length;
   Pack? get selectedPack => _selectedPack;
+  List<Team> get teams => _teams;
+  int get turn => _turn;
+  bool get isGameStarted => _isGameStarted;
+  Team get playingTeam => _teams[_playingTeamIndex];
 
   set setSelectedPack(Pack pack) {
     _selectedPack = pack;
@@ -39,6 +46,18 @@ class GameViewModel with ChangeNotifier {
   set setLevel(DifficultyLevel level) {
     _level = level;
     notifyListeners();
+  }
+
+  set setTurn(int turn) => _turn = turn;
+
+  set setGameStarted(bool isGameStarted) => _isGameStarted = isGameStarted;
+
+  void increasePlayingTeamIndex() {
+    if (_playingTeamIndex == teamQuantity - 1) {
+      _playingTeamIndex = 0;
+    } else {
+      _playingTeamIndex++;
+    }
   }
 
   void clearPack() {
@@ -100,10 +119,5 @@ class GameViewModel with ChangeNotifier {
 
   bool isTeamsValid() {
     return _teams.every((element) => element.name.isNotEmpty);
-  }
-
-  void clearSelectedPack() {
-    _selectedPack = null;
-    notifyListeners();
   }
 }

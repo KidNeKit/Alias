@@ -36,9 +36,7 @@ class SelectedPack extends StatelessWidget {
                 visible: value.selectedPack != null,
                 child: GestureDetector(
                   onTap: () {
-                    value.clearSelectedPack();
-                    Provider.of<GameViewModel>(context, listen: false)
-                        .clearPack();
+                    value.clearPack();
                   },
                   child: const Icon(
                     Icons.cancel_rounded,

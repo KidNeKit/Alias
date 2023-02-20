@@ -8,6 +8,7 @@ import 'views/game_settings/game_settings_screen.dart';
 import 'views/home/home_screen.dart';
 import 'views/lobby/lobby_screen.dart';
 import 'views/pack/pack_screen.dart';
+import 'views/play_screen/play_screen.dart';
 import 'views/teams/teams_screen.dart';
 
 void main() {
@@ -37,6 +38,7 @@ class AliasApp extends StatelessWidget {
           GameSettingsScreen.routeName: (context) => const GameSettingsScreen(),
           PackScreen.routeName: (context) => const PackScreen(),
           LobbyScreen.routeName: (context) => const LobbyScreen(),
+          PlayScreen.routeName: (context) => const PlayScreen(),
         },
       ),
     );
