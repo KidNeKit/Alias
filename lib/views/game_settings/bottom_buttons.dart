@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../view_models/game_view_model.dart';
-import '../../view_models/pack_view_model.dart';
 import '../components/custom_button.dart';
 import '../lobby/lobby_screen.dart';
 
@@ -18,8 +17,6 @@ class BottomButtons extends StatelessWidget {
             text: 'Back',
             onPressedFunc: () {
               value.clearGameData();
-              Provider.of<PackViewModel>(context, listen: false)
-                  .clearSelectedPack();
               Navigator.of(context).pop();
             },
           ),

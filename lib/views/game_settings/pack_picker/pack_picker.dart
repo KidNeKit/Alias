@@ -1,8 +1,8 @@
-import 'package:alias/view_models/pack_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../resources/colors.dart';
+import '../../../view_models/game_view_model.dart';
 import '../../pack/pack_screen.dart';
 
 class PackPicker extends StatelessWidget {
@@ -14,7 +14,7 @@ class PackPicker extends StatelessWidget {
       onTap: () {
         Navigator.of(context).pushNamed(PackScreen.routeName);
       },
-      child: Consumer<PackViewModel>(builder: (context, value, child) {
+      child: Consumer<GameViewModel>(builder: (context, value, child) {
         bool isPackSelected = value.selectedPack != null;
         return Center(
           child: Container(

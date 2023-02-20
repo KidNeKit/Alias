@@ -1,15 +1,15 @@
-import 'package:alias/resources/colors.dart';
-import 'package:alias/view_models/game_view_model.dart';
-import 'package:alias/view_models/pack_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../../resources/colors.dart';
+import '../../../view_models/game_view_model.dart';
 
 class SelectedPack extends StatelessWidget {
   const SelectedPack({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<PackViewModel>(
+    return Consumer<GameViewModel>(
       builder: (context, value, child) => Container(
         height: 100,
         width: double.infinity,

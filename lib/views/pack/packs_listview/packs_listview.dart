@@ -1,9 +1,9 @@
-import 'package:alias/view_models/game_view_model.dart';
-import 'package:alias/views/pack/packs_listview/pack_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../view_models/game_view_model.dart';
 import '../../../view_models/pack_view_model.dart';
+import 'pack_item.dart';
 
 class PacksListView extends StatefulWidget {
   const PacksListView({super.key});
@@ -35,20 +35,20 @@ class _PacksListViewState extends State<PacksListView> {
             ? const Center(
                 child: CircularProgressIndicator(),
               )
-            : ListView.separated(
-                itemCount: value.packs.length,
-                separatorBuilder: (context, index) =>
-                    const SizedBox(height: 5.0),
-                itemBuilder: (context, index) => GestureDetector(
-                  onTap: () {
-                    value.setSelectedPack = value.packs[index];
-                    Provider.of<GameViewModel>(context, listen: false).setPack =
-                        value.packs[index];
-                  },
-                  child: PackItem(
-                    packName: value.packs[index].name,
-                    isSelected:
-                        value.packs[index].name == value.selectedPack?.name,
+            : Consumer<GameViewModel>(
+                builder: (context, gameValue, child) => ListView.separated(
+                  itemCount: value.packs.length,
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: 5.0),
+                  itemBuilder: (context, index) => GestureDetector(
+                    onTap: () {
+                      gameValue.setPack = value.packs[index];
+                    },
+                    child: PackItem(
+                      packName: value.packs[index].name,
+                      isSelected: value.packs[index].name ==
+                          gameValue.selectedPack?.name,
+                    ),
                   ),
                 ),
               ),

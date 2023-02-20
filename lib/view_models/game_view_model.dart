@@ -9,7 +9,7 @@ import '../models/team.dart';
 
 class GameViewModel with ChangeNotifier {
   WinPoints? _winPoints;
-  Pack? _pack;
+  Pack? _selectedPack;
   DifficultyLevel? _level;
   final List<Team> _teams = [
     Team.initial(),
@@ -17,16 +17,24 @@ class GameViewModel with ChangeNotifier {
   ];
 
   WinPoints? get winPoints => _winPoints;
-  Pack? get pack => _pack;
   DifficultyLevel? get level => _level;
   int get teamQuantity => _teams.length;
+  Pack? get selectedPack => _selectedPack;
+
+  set setSelectedPack(Pack pack) {
+    _selectedPack = pack;
+    notifyListeners();
+  }
 
   set setWinPoints(WinPoints points) {
     _winPoints = points;
     notifyListeners();
   }
 
-  set setPack(Pack pack) => _pack = pack;
+  set setPack(Pack pack) {
+    _selectedPack = pack;
+    notifyListeners();
+  }
 
   set setLevel(DifficultyLevel level) {
     _level = level;
@@ -34,20 +42,20 @@ class GameViewModel with ChangeNotifier {
   }
 
   void clearPack() {
-    _pack = null;
+    _selectedPack = null;
     _level = null;
     notifyListeners();
   }
 
   void clearGameData() {
     _winPoints = null;
-    _pack = null;
+    _selectedPack = null;
     _level = null;
     notifyListeners();
   }
 
   bool isDataValid() {
-    if (_pack == null) {
+    if (_selectedPack == null) {
       log('Please choose pack');
       return false;
     }
@@ -92,5 +100,10 @@ class GameViewModel with ChangeNotifier {
 
   bool isTeamsValid() {
     return _teams.every((element) => element.name.isNotEmpty);
+  }
+
+  void clearSelectedPack() {
+    _selectedPack = null;
+    notifyListeners();
   }
 }
