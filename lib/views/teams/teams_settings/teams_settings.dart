@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../resources/colors.dart';
-import '../../../view_models/team_view_model.dart';
+import '../../../view_models/game_view_model.dart';
 
 class TeamsSettings extends StatelessWidget {
   const TeamsSettings({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<TeamViewModel>(
+    return Consumer<GameViewModel>(
       builder: (context, value, child) => Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

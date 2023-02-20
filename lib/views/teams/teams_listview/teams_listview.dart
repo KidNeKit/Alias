@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../view_models/team_view_model.dart';
+import '../../../view_models/game_view_model.dart';
 import 'team_item.dart';
 
 class TeamsListView extends StatelessWidget {
@@ -10,7 +10,7 @@ class TeamsListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Consumer<TeamViewModel>(
+      child: Consumer<GameViewModel>(
         builder: (context, value, child) {
           return ListView.separated(
             itemCount: value.teamQuantity,

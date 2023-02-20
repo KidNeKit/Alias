@@ -1,9 +1,9 @@
-import 'package:alias/view_models/team_view_model.dart';
-import 'package:alias/views/game_settings/game_settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../view_models/game_view_model.dart';
 import '../components/custom_button.dart';
+import '../game_settings/game_settings_screen.dart';
 
 class BottomButtons extends StatelessWidget {
   const BottomButtons({super.key});
@@ -12,7 +12,7 @@ class BottomButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Consumer<TeamViewModel>(
+        Consumer<GameViewModel>(
           builder: (context, value, child) => CustomButton(
             text: 'Back',
             onPressedFunc: () {
@@ -25,7 +25,7 @@ class BottomButtons extends StatelessWidget {
         CustomButton(
           text: 'Continue',
           onPressedFunc: () {
-            bool isValid = Provider.of<TeamViewModel>(context, listen: false)
+            bool isValid = Provider.of<GameViewModel>(context, listen: false)
                 .isTeamsValid();
             if (!isValid) {
               ScaffoldMessenger.of(context).showSnackBar(

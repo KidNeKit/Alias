@@ -1,7 +1,8 @@
-import 'package:alias/resources/colors.dart';
-import 'package:alias/view_models/team_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../../resources/colors.dart';
+import '../../../view_models/game_view_model.dart';
 
 class TeamItem extends StatelessWidget {
   final int _position;
@@ -26,7 +27,7 @@ class TeamItem extends StatelessWidget {
           Expanded(
             child: TextField(
               onChanged: (value) =>
-                  Provider.of<TeamViewModel>(context, listen: false)
+                  Provider.of<GameViewModel>(context, listen: false)
                       .changeTeamName(_position, value),
             ),
           ),

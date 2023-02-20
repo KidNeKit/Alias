@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'resources/theme.dart';
 import 'view_models/game_view_model.dart';
 import 'view_models/pack_view_model.dart';
-import 'view_models/team_view_model.dart';
 import 'views/game_settings/game_settings_screen.dart';
 import 'views/home/home_screen.dart';
 import 'views/lobby/lobby_screen.dart';
@@ -22,9 +21,6 @@ class AliasApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<TeamViewModel>(
-          create: (context) => TeamViewModel(),
-        ),
         ChangeNotifierProvider<PackViewModel>(
           create: (context) => PackViewModel(),
         ),
