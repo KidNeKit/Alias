@@ -1,13 +1,10 @@
-import 'dart:async';
-import 'dart:developer';
-
-import 'package:alias/view_models/game_view_model.dart';
-import 'package:alias/view_models/turn_view_model.dart';
-import 'package:alias/views/play_screen/turn_timer.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../resources/colors.dart';
-import 'package:flutter/material.dart';
+import '../../view_models/turn_view_model.dart';
+import '../turn_result/turn_result_screen.dart';
+import 'turn_timer.dart';
 
 class PlayScreen extends StatefulWidget {
   static const String routeName = '/play_screen';
@@ -39,7 +36,7 @@ class _PlayScreenState extends State<PlayScreen> {
               Consumer<TurnViewModel>(
                 builder: (context, value, child) {
                   return Text(
-                    value.showedWord,
+                    value.currentWord,
                     style: Theme.of(context).textTheme.labelLarge,
                   );
                 },
@@ -52,6 +49,10 @@ class _PlayScreenState extends State<PlayScreen> {
                       child: ElevatedButton(
                         onPressed: () {
                           value.nextWord();
+                          if (value.isTurnBlocked) {
+                            Navigator.of(context).pushReplacementNamed(
+                                TurnResultScreen.routeName);
+                          }
                         },
                         child: const Text('Skip'),
                       ),
@@ -61,6 +62,10 @@ class _PlayScreenState extends State<PlayScreen> {
                       child: ElevatedButton(
                         onPressed: () {
                           value.markWordAsCorrect();
+                          if (value.isTurnBlocked) {
+                            Navigator.of(context).pushReplacementNamed(
+                                TurnResultScreen.routeName);
+                          }
                         },
                         child: const Text('Correct'),
                       ),

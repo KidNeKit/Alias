@@ -1,64 +1,67 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:alias/view_models/game_view_model.dart';
 import 'package:flutter/material.dart';
 
-import '../models/team.dart';
+import 'game_view_model.dart';
 
 class TurnViewModel with ChangeNotifier {
-  List<String> _words = [];
-  Team? _team;
-  int _secondsLeft = 0;
-  String? _showedWord;
+  static const int _initialTurnTime = 10;
+  final List<String> _packWords = [];
+  final List<String> _shownWords = [];
+  final List<String> _correctWords = [];
+
   bool _isTurnBlocked = false;
+  int _secondsLeft = _initialTurnTime;
   int _wordIndex = 0;
 
-  List<String> _shownWords = [];
-  List<String> _correctWords = [];
-
-  GameViewModel? _gameViewModel;
-
-  List<String> get words => _words;
-  String get showedWord => _showedWord ?? 'Skibidi loading';
+  String get currentWord => _packWords[_wordIndex];
   int get secondsLeft => _secondsLeft;
+  double get secondsLeftPercentage => _secondsLeft / _initialTurnTime * 100;
   bool get isTurnBlocked => _isTurnBlocked;
 
-  TurnViewModel({GameViewModel? gameViewModel})
-      : _gameViewModel = gameViewModel {
-    if (_gameViewModel != null) {
-      _team = _gameViewModel!.playingTeam;
-      _words = _gameViewModel!.packWords;
+  TurnViewModel({GameViewModel? gameViewModel}) {
+    if (gameViewModel != null) {
+      _packWords.addAll([...gameViewModel.packWords]);
     }
   }
 
+  void _refreshState() {
+    _secondsLeft = _initialTurnTime;
+    _wordIndex = 0;
+    _isTurnBlocked = false;
+    _packWords.shuffle();
+    _shownWords.clear();
+    _correctWords.clear();
+  }
+
   void startTurn() {
-    _secondsLeft = 60;
-    _showedWord = _words[_wordIndex];
-    _shownWords.add(_words[_wordIndex]);
+    _refreshState();
+    _shownWords.add(currentWord);
     Timer.periodic(
       const Duration(seconds: 1),
       (timer) {
-        if (secondsLeft == 1) {
+        _secondsLeft--;
+        if (_secondsLeft == 0) {
           _isTurnBlocked = true;
           timer.cancel();
-          log('answered correct: $_correctWords');
         }
-        _secondsLeft--;
         notifyListeners();
       },
     );
   }
 
   void markWordAsCorrect() {
-    _correctWords.add(_showedWord!);
+    _correctWords.add(currentWord);
     nextWord();
   }
 
-  void markWordAsSkiped() {}
-
   void nextWord() {
-    _showedWord = _words[++_wordIndex];
-    notifyListeners();
+    if (!_isTurnBlocked) {
+      _wordIndex++;
+      notifyListeners();
+    } else {
+      log('turn ended');
+    }
   }
 }

@@ -1,18 +1,19 @@
 import 'dart:developer';
 
-import 'package:alias/view_models/turn_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'resources/theme.dart';
 import 'view_models/game_view_model.dart';
 import 'view_models/pack_view_model.dart';
+import 'view_models/turn_view_model.dart';
 import 'views/game_settings/game_settings_screen.dart';
 import 'views/home/home_screen.dart';
 import 'views/lobby/lobby_screen.dart';
 import 'views/pack/pack_screen.dart';
 import 'views/play_screen/play_screen.dart';
 import 'views/teams/teams_screen.dart';
+import 'views/turn_result/turn_result_screen.dart';
 
 void main() {
   runApp(const AliasApp());
@@ -49,6 +50,7 @@ class AliasApp extends StatelessWidget {
           PackScreen.routeName: (context) => const PackScreen(),
           LobbyScreen.routeName: (context) => const LobbyScreen(),
           PlayScreen.routeName: (context) => const PlayScreen(),
+          TurnResultScreen.routeName: (context) => const TurnResultScreen(),
         },
       ),
     );
