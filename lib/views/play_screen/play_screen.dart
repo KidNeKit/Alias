@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -32,16 +34,28 @@ class _PlayScreenState extends State<PlayScreen> {
           child: Column(
             children: [
               const TurnTimer(),
-              const Spacer(),
               Consumer<TurnViewModel>(
                 builder: (context, value, child) {
-                  return Text(
-                    value.currentWord,
-                    style: Theme.of(context).textTheme.labelLarge,
+                  return Expanded(
+                    child: Container(
+                      width: double.infinity,
+                      margin: const EdgeInsets.symmetric(vertical: 20.0),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20.0),
+                          color: lightColor),
+                      child: Center(
+                        child: Text(
+                          value.currentWord,
+                          style: Theme.of(context)
+                              .textTheme
+                              .labelLarge!
+                              .copyWith(color: darkColor),
+                        ),
+                      ),
+                    ),
                   );
                 },
               ),
-              const Spacer(),
               Consumer<TurnViewModel>(
                 builder: (context, value, child) => Row(
                   children: [
