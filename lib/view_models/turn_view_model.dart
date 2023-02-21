@@ -19,6 +19,8 @@ class TurnViewModel with ChangeNotifier {
   int get secondsLeft => _secondsLeft;
   double get secondsLeftPercentage => _secondsLeft / _initialTurnTime * 100;
   bool get isTurnBlocked => _isTurnBlocked;
+  List<String> get correctWords => _correctWords;
+  List<String> get shownWords => _shownWords;
 
   TurnViewModel({GameViewModel? gameViewModel}) {
     if (gameViewModel != null) {
@@ -36,6 +38,7 @@ class TurnViewModel with ChangeNotifier {
   }
 
   void startTurn() {
+    log('start turn');
     _refreshState();
     _shownWords.add(currentWord);
     Timer.periodic(
@@ -59,9 +62,15 @@ class TurnViewModel with ChangeNotifier {
   void nextWord() {
     if (!_isTurnBlocked) {
       _wordIndex++;
+      _shownWords.add(currentWord);
       notifyListeners();
     } else {
       log('turn ended');
     }
+  }
+
+  @override
+  String toString() {
+    return '$shownWords';
   }
 }

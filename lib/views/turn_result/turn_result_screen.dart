@@ -1,3 +1,6 @@
+import 'package:alias/views/lobby/lobby_screen.dart';
+import 'package:alias/views/turn_result/result_header/result_header.dart';
+import 'package:alias/views/turn_result/words_listview/words_listview.dart';
 import 'package:flutter/material.dart';
 
 import '../../resources/colors.dart';
@@ -14,8 +17,21 @@ class TurnResultScreen extends StatelessWidget {
         child: Container(
           width: double.infinity,
           padding: const EdgeInsets.all(15.0),
-          child: const Center(
-            child: Text('Results'),
+          child: Column(
+            children: [
+              const ResultHeader(),
+              const WordsListView(),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context)
+                      .pushReplacementNamed(LobbyScreen.routeName);
+                },
+                child: Text(
+                  'Continue',
+                  style: Theme.of(context).textTheme.labelMedium,
+                ),
+              ),
+            ],
           ),
         ),
       ),

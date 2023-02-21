@@ -35,7 +35,7 @@ class AliasApp extends StatelessWidget {
         ChangeNotifierProxyProvider<GameViewModel, TurnViewModel>(
           create: (context) => TurnViewModel(),
           update: (context, value, previous) {
-            log(value.toString());
+            log('state updated. previous: $previous');
             return TurnViewModel(gameViewModel: value);
           },
         ),
