@@ -34,6 +34,10 @@ class Team {
     _lastPosition--;
   }
 
+  void addPoints(int points) {
+    _points += points;
+  }
+
   @override
   String toString() {
     return 'name: $_name, position: $_position, points: $_points';

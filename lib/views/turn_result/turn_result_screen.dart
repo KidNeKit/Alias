@@ -1,9 +1,11 @@
-import 'package:alias/views/lobby/lobby_screen.dart';
-import 'package:alias/views/turn_result/result_header/result_header.dart';
-import 'package:alias/views/turn_result/words_listview/words_listview.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../resources/colors.dart';
+import '../../view_models/turn_view_model.dart';
+import '../lobby/lobby_screen.dart';
+import 'result_header/result_header.dart';
+import 'words_listview/words_listview.dart';
 
 class TurnResultScreen extends StatelessWidget {
   static const String routeName = '/turn_result_screen';
@@ -23,6 +25,7 @@ class TurnResultScreen extends StatelessWidget {
               const WordsListView(),
               ElevatedButton(
                 onPressed: () {
+                  Provider.of<TurnViewModel>(context, listen: false).endTurn();
                   Navigator.of(context)
                       .pushReplacementNamed(LobbyScreen.routeName);
                 },

@@ -3,10 +3,11 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 
+import '../models/team.dart';
 import 'game_view_model.dart';
 
 class TurnViewModel with ChangeNotifier {
-  static const int _initialTurnTime = 10;
+  static const int _initialTurnTime = 3;
   final List<String> _packWords = [];
   final List<String> _shownWords = [];
   final List<String> _correctWords = [];
@@ -15,6 +16,9 @@ class TurnViewModel with ChangeNotifier {
   int _secondsLeft = _initialTurnTime;
   int _wordIndex = 0;
 
+  late Team _currentTeam;
+  late Sink _streamSink;
+
   String get currentWord => _packWords[_wordIndex];
   int get secondsLeft => _secondsLeft;
   double get secondsLeftPercentage => _secondsLeft / _initialTurnTime * 100;
@@ -22,9 +26,11 @@ class TurnViewModel with ChangeNotifier {
   List<String> get correctWords => _correctWords;
   List<String> get shownWords => _shownWords;
 
-  TurnViewModel({GameViewModel? gameViewModel}) {
+  set setGameViewModel(GameViewModel? gameViewModel) {
     if (gameViewModel != null) {
       _packWords.addAll([...gameViewModel.packWords]);
+      _currentTeam = gameViewModel.playingTeam;
+      _streamSink = gameViewModel.turnResults.sink;
     }
   }
 
@@ -67,6 +73,11 @@ class TurnViewModel with ChangeNotifier {
     } else {
       log('turn ended');
     }
+  }
+
+  void endTurn() {
+    _streamSink.add(_correctWords.length);
+    //_streamSink.close();
   }
 
   @override

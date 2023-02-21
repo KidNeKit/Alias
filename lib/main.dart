@@ -36,7 +36,10 @@ class AliasApp extends StatelessWidget {
           create: (context) => TurnViewModel(),
           update: (context, value, previous) {
             log('state updated. previous: $previous');
-            return TurnViewModel(gameViewModel: value);
+            if (previous != null) {
+              previous.setGameViewModel = value;
+            }
+            return previous ?? TurnViewModel();
           },
         ),
       ],

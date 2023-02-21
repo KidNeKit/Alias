@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:rxdart/subjects.dart';
 
 import '../models/enums/difficulty_level.dart';
 import '../models/enums/win_points.dart';
@@ -18,6 +19,17 @@ class GameViewModel with ChangeNotifier {
     Team.initial(),
     Team.initial(),
   ];
+  PublishSubject turnResults = PublishSubject();
+
+  GameViewModel() {
+    log('created subscription');
+    turnResults.listen((value) {
+      log('message received: $value');
+      playingTeam.addPoints(value);
+      nextTeamTurn();
+      //notifyListeners();
+    });
+  }
 
   WinPoints? get winPoints => _winPoints;
   DifficultyLevel? get level => _level;
@@ -122,6 +134,15 @@ class GameViewModel with ChangeNotifier {
 
   bool isTeamsValid() {
     return _teams.every((element) => element.name.isNotEmpty);
+  }
+
+  void nextTeamTurn() {
+    if (_playingTeamIndex == _teams.length - 1) {
+      _playingTeamIndex = 0;
+      _turn++;
+    } else {
+      _playingTeamIndex++;
+    }
   }
 
   @override
