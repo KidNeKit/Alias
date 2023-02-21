@@ -27,6 +27,9 @@ class GameViewModel with ChangeNotifier {
   int get turn => _turn;
   bool get isGameStarted => _isGameStarted;
   Team get playingTeam => _teams[_playingTeamIndex];
+  List<String> get packWords => _selectedPack!.levels
+      .firstWhere((element) => element.level == level!)
+      .words;
 
   set setSelectedPack(Pack pack) {
     _selectedPack = pack;
@@ -119,5 +122,10 @@ class GameViewModel with ChangeNotifier {
 
   bool isTeamsValid() {
     return _teams.every((element) => element.name.isNotEmpty);
+  }
+
+  @override
+  String toString() {
+    return 'team: $_selectedPack';
   }
 }

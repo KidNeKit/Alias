@@ -1,0 +1,51 @@
+{
+    "packName": "Footballers",
+    "levels": [
+        {
+            "level": "easy",
+            "words": [
+                "Cristiano Ronaldo",
+                "Lionel Messi",
+                "Neymar Jr",
+                "Lionel Messi",
+                "Lionel Messi",
+                "Lionel Messi",
+                "Lionel Messi",
+                "Lionel Messi",
+                "Lionel Messi",
+                "Lionel Messi",
+                "Lionel Messi",
+                "Lionel Messi",
+                "Lionel Messi",
+                "Lionel Messi",
+                "Lionel Messi",
+                "Lionel Messi",
+                "Lionel Messi",
+                "Lionel Messi",
+                "Lionel Messi",
+                "Lionel Messi"
+            ]
+        },
+        {
+            "level": "medium",
+            "words": [
+                "Toni Kroos",
+                "Casemiro",
+                "Frank Ribery",
+                "Frank Lampard",
+                "Eden Hazard",
+                "Kepa",
+                "Muller",
+                "Neuer",
+                "Ter Stegen",
+                "Gotze"
+            ]
+        },
+        {
+            "level": "hard",
+            "words": [
+                "munanyo"
+            ]
+        }
+    ]
+}

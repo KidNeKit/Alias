@@ -8,6 +8,7 @@ class PackRepository {
   static const Set<String> _packNames = {
     'first',
     'second',
+    'footballers',
   };
 
   Future<List<Pack>> loadPacks() async {

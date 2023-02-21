@@ -65,6 +65,7 @@ flutter:
   assets:
     - assets/json_packs/first.json
     - assets/json_packs/second.json
+    - assets/json_packs/footballers.json
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

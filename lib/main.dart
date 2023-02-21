@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:alias/view_models/turn_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -27,6 +30,13 @@ class AliasApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<GameViewModel>(
           create: (context) => GameViewModel(),
+        ),
+        ChangeNotifierProxyProvider<GameViewModel, TurnViewModel>(
+          create: (context) => TurnViewModel(),
+          update: (context, value, previous) {
+            log(value.toString());
+            return TurnViewModel(gameViewModel: value);
+          },
         ),
       ],
       child: MaterialApp(
