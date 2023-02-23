@@ -11,7 +11,8 @@ class PlayButton extends StatelessWidget {
     return Align(
       alignment: Alignment.center,
       child: GestureDetector(
-        onTap: () => Navigator.of(context).pushNamed(PlayScreen.routeName),
+        onTap: () =>
+            Navigator.of(context).pushReplacementNamed(PlayScreen.routeName),
         child: Container(
           height: 0.5 * screenWidth,
           width: 0.5 * screenWidth,

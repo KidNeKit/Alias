@@ -9,7 +9,7 @@ class PackViewModel with ChangeNotifier {
 
   Future<void> loadPacks() async {
     packs.clear();
-    _packRepository.loadPacks().then((value) {
+    await _packRepository.loadPacks().then((value) {
       packs.addAll(value);
     });
   }

@@ -7,7 +7,7 @@ import '../models/team.dart';
 import 'game_view_model.dart';
 
 class TurnViewModel with ChangeNotifier {
-  static const int _initialTurnTime = 3;
+  static const int _initialTurnTime = 10;
   final List<String> _packWords = [];
   final List<String> _shownWords = [];
   final List<String> _correctWords = [];

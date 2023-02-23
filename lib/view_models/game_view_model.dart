@@ -14,7 +14,9 @@ class GameViewModel with ChangeNotifier {
   DifficultyLevel? _level;
   int _turn = 1;
   bool _isGameStarted = false;
+  bool _isGameEnded = false;
   int _playingTeamIndex = 0;
+  bool _isLastTurn = false;
   final List<Team> _teams = [
     Team.initial(),
     Team.initial(),
@@ -26,8 +28,10 @@ class GameViewModel with ChangeNotifier {
     turnResults.listen((value) {
       log('message received: $value');
       playingTeam.addPoints(value);
+      if (playingTeam.points >= _winPoints!.value) {
+        _isLastTurn = true;
+      }
       nextTeamTurn();
-      //notifyListeners();
     });
   }
 
@@ -38,6 +42,7 @@ class GameViewModel with ChangeNotifier {
   List<Team> get teams => _teams;
   int get turn => _turn;
   bool get isGameStarted => _isGameStarted;
+  bool get isGameEnded => _isGameEnded;
   Team get playingTeam => _teams[_playingTeamIndex];
   List<String> get packWords => _selectedPack!.levels
       .firstWhere((element) => element.level == level!)
@@ -138,8 +143,12 @@ class GameViewModel with ChangeNotifier {
 
   void nextTeamTurn() {
     if (_playingTeamIndex == _teams.length - 1) {
-      _playingTeamIndex = 0;
-      _turn++;
+      if (!_isLastTurn) {
+        _playingTeamIndex = 0;
+        _turn++;
+      } else {
+        _isGameEnded = true;
+      }
     } else {
       _playingTeamIndex++;
     }

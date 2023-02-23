@@ -1,5 +1,7 @@
+import 'package:alias/view_models/game_view_model.dart';
 import 'package:alias/views/lobby/play_button.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../resources/colors.dart';
 import 'current_turn.dart';
@@ -19,15 +21,18 @@ class LobbyScreen extends StatelessWidget {
           width: double.infinity,
           padding: const EdgeInsets.all(15.0),
           child: Column(
-            children: const [
-              PointsToWin(),
-              SizedBox(height: 10.0),
-              TeamPoints(),
-              SizedBox(height: 10.0),
-              CurrentTurn(),
-              Spacer(),
-              PlayButton(),
-              Spacer(),
+            children: [
+              const PointsToWin(),
+              const SizedBox(height: 10.0),
+              const TeamPoints(),
+              const SizedBox(height: 10.0),
+              const CurrentTurn(),
+              const Spacer(),
+              Consumer<GameViewModel>(
+                builder: (context, value, child) =>
+                    value.isGameEnded ? Container() : const PlayButton(),
+              ),
+              const Spacer(),
             ],
           ),
         ),
