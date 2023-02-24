@@ -1,13 +1,13 @@
-import 'package:alias/views/teams/bottom_buttons.dart';
-import 'package:alias/views/teams/teams_settings/teams_settings.dart';
+import 'package:alias/views/playing_teams/bottom_buttons.dart';
+import 'package:alias/views/playing_teams/teams_settings/teams_settings.dart';
 import 'package:flutter/material.dart';
 
 import '../../resources/colors.dart';
 import 'teams_listview/teams_listview.dart';
 
-class TeamScreen extends StatelessWidget {
-  static const String routeName = '/teams_screen';
-  const TeamScreen({super.key});
+class PlayingTeamsScreen extends StatelessWidget {
+  static const String routeName = '/playing_teams_screen';
+  const PlayingTeamsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

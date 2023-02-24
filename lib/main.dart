@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:alias/views/teams_screen/teams_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,7 +13,7 @@ import 'views/home/home_screen.dart';
 import 'views/lobby/lobby_screen.dart';
 import 'views/pack/pack_screen.dart';
 import 'views/play_screen/play_screen.dart';
-import 'views/teams/teams_screen.dart';
+import 'views/playing_teams/teams_screen.dart';
 import 'views/turn_result/turn_result_screen.dart';
 
 void main() {
@@ -48,12 +49,13 @@ class AliasApp extends StatelessWidget {
         themeMode: ThemeMode.light,
         home: const HomeScreen(),
         routes: {
-          TeamScreen.routeName: (context) => const TeamScreen(),
+          PlayingTeamsScreen.routeName: (context) => const PlayingTeamsScreen(),
           GameSettingsScreen.routeName: (context) => const GameSettingsScreen(),
           PackScreen.routeName: (context) => const PackScreen(),
           LobbyScreen.routeName: (context) => const LobbyScreen(),
           PlayScreen.routeName: (context) => const PlayScreen(),
           TurnResultScreen.routeName: (context) => const TurnResultScreen(),
+          TeamsScreen.routeName: (context) => const TeamsScreen(),
         },
       ),
     );

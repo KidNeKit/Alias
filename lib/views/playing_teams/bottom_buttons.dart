@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../view_models/game_view_model.dart';
-import '../components/custom_button.dart';
+import '../global_components/custom_button.dart';
 import '../game_settings/game_settings_screen.dart';
 
 class BottomButtons extends StatelessWidget {
