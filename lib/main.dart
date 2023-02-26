@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:alias/view_models/teams_view_model.dart';
 import 'package:alias/views/teams_screen/teams_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -27,6 +28,9 @@ class AliasApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider<TeamsViewModel>(
+          create: (context) => TeamsViewModel(),
+        ),
         ChangeNotifierProvider<PackViewModel>(
           create: (context) => PackViewModel(),
         ),
