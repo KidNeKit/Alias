@@ -8,6 +8,17 @@ import 'base_teams_repository.dart';
 
 class TeamsRepository extends BaseTeamsRepository {
   @override
+  Future<TeamMemory> getTeamById(String id) async {
+    var prefs = await SharedPreferences.getInstance();
+    String team = prefs.getString('teams') ?? '';
+    log('team: $team');
+    List<dynamic> jsonList = team.isEmpty ? [] : jsonDecode(team);
+    return jsonList
+        .map((e) => TeamMemory.fromJson(e))
+        .firstWhere((element) => element.id == id);
+  }
+
+  @override
   Future<List<TeamMemory>> getTeams() async {
     var prefs = await SharedPreferences.getInstance();
     String team = prefs.getString('teams') ?? '';

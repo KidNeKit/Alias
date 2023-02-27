@@ -1,5 +1,8 @@
 import 'dart:developer';
 
+import 'package:alias/view_models/teams_view_model.dart';
+import 'package:provider/provider.dart';
+
 import '../global_components/body_wrapper.dart';
 import '../global_components/team_card.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +29,7 @@ class _TeamInfoScreenState extends State<TeamInfoScreen>
 
   @override
   void initState() {
+    Provider.of<TeamsViewModel>(context, listen: false).setEditableTeam();
     _isEditing = widget._isInGameCreating ? true : widget._isEditing;
     _opacityController = AnimationController(
       vsync: this,
@@ -50,36 +54,42 @@ class _TeamInfoScreenState extends State<TeamInfoScreen>
         ModalRoute.of(context)!.settings.arguments as Map<String, String>? ??
             {};
     String index = args['index'] ?? '';
-    return BodyWrapper(
-      floatingIcon: Icon(widget._isInGameCreating
-          ? Icons.check
-          : _isEditing
-              ? Icons.save
-              : Icons.edit),
-      floatingFunc: () {
-        if (widget._isInGameCreating) {
-          Navigator.of(context).pop();
-        } else {
-          _opacityController.reverse().then((value) {
-            _isEditing = !_isEditing;
-            Future.delayed(const Duration(milliseconds: 300),
-                () => _opacityController.forward());
-          });
-        }
+    return WillPopScope(
+      onWillPop: () async {
+        Provider.of<TeamsViewModel>(context, listen: false).wipeTeamChanges();
+        return true;
       },
-      body: Hero(
-        tag: 'team_$index',
-        child: Column(
-          children: [
-            const TeamCard(),
-            Visibility(
-              visible: _isInitialized,
-              child: Opacity(
-                opacity: _opacityController.value,
-                child: _isEditing ? _buildEditBody() : _buildInfoBody(),
+      child: BodyWrapper(
+        floatingIcon: Icon(widget._isInGameCreating
+            ? Icons.check
+            : _isEditing
+                ? Icons.save
+                : Icons.edit),
+        floatingFunc: () {
+          if (widget._isInGameCreating) {
+            Navigator.of(context).pop();
+          } else {
+            _opacityController.reverse().then((value) {
+              _isEditing = !_isEditing;
+              Future.delayed(const Duration(milliseconds: 300),
+                  () => _opacityController.forward());
+            });
+          }
+        },
+        body: Hero(
+          tag: 'team_$index',
+          child: Column(
+            children: [
+              const TeamCard(),
+              Visibility(
+                visible: _isInitialized,
+                child: Opacity(
+                  opacity: _opacityController.value,
+                  child: _isEditing ? _buildEditBody() : _buildInfoBody(),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

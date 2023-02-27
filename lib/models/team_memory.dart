@@ -14,6 +14,8 @@ class TeamMemory {
       : _id = id,
         _name = name;
 
+  String get id => _id;
+
   set setName(String name) => _name = name;
 
   static TeamMemory fromJson(Map<String, dynamic> json) {
