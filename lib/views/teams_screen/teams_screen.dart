@@ -1,12 +1,10 @@
-import 'dart:developer';
-
-import 'package:alias/views/global_components/team_card.dart';
-import 'package:alias/views/team_stats/team_stats_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../view_models/teams_view_model.dart';
 import '../global_components/body_wrapper.dart';
+import '../global_components/team_card.dart';
+import '../team_info/team_info_screen.dart';
 
 class TeamsScreen extends StatelessWidget {
   static const String routeName = '/teams_screen';
@@ -34,7 +32,7 @@ class TeamsScreen extends StatelessWidget {
             itemCount: snapshot.data!.length,
             itemBuilder: (context, index) => GestureDetector(
               onTap: () => Navigator.of(context).pushNamed(
-                TeamStatsScreen.routeName,
+                TeamInfoScreen.routeName,
                 arguments: {'index': index.toString()},
               ),
               child: Hero(

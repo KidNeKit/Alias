@@ -1,11 +1,8 @@
-import 'package:alias/views/global_components/body_wrapper.dart';
-import 'package:alias/views/playing_teams/bottom_buttons.dart';
-import 'package:alias/views/playing_teams/components/teams_list.dart';
-import 'package:alias/views/playing_teams/teams_settings/teams_settings.dart';
 import 'package:flutter/material.dart';
 
-import '../../resources/colors.dart';
-import 'teams_listview/teams_listview.dart';
+import '../global_components/body_wrapper.dart';
+import '../team_info/team_info_screen.dart';
+import 'components/teams_list.dart';
 
 class PlayingTeamsScreen extends StatelessWidget {
   static const String routeName = '/playing_teams_screen';
@@ -39,6 +36,9 @@ class PlayingTeamsScreen extends StatelessWidget {
         // );
 
         BodyWrapper(
+      floatingIcon: const Icon(Icons.add),
+      floatingFunc: () =>
+          Navigator.of(context).pushNamed(TeamInfoScreen.routeName),
       body: Column(
         children: [
           Text(

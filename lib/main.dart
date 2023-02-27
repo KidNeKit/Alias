@@ -1,14 +1,12 @@
 import 'dart:developer';
 
-import 'package:alias/view_models/teams_view_model.dart';
-import 'package:alias/views/team_stats/team_stats_screen.dart';
-import 'package:alias/views/teams_screen/teams_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'resources/theme.dart';
 import 'view_models/game_view_model.dart';
 import 'view_models/pack_view_model.dart';
+import 'view_models/teams_view_model.dart';
 import 'view_models/turn_view_model.dart';
 import 'views/game_settings/game_settings_screen.dart';
 import 'views/home/home_screen.dart';
@@ -16,6 +14,8 @@ import 'views/lobby/lobby_screen.dart';
 import 'views/pack/pack_screen.dart';
 import 'views/play_screen/play_screen.dart';
 import 'views/playing_teams/teams_screen.dart';
+import 'views/team_info/team_info_screen.dart';
+import 'views/teams_screen/teams_screen.dart';
 import 'views/turn_result/turn_result_screen.dart';
 
 void main() {
@@ -61,7 +61,7 @@ class AliasApp extends StatelessWidget {
           PlayScreen.routeName: (context) => const PlayScreen(),
           TurnResultScreen.routeName: (context) => const TurnResultScreen(),
           TeamsScreen.routeName: (context) => const TeamsScreen(),
-          TeamStatsScreen.routeName: (context) => const TeamStatsScreen(),
+          TeamInfoScreen.routeName: (context) => const TeamInfoScreen(),
         },
       ),
     );
