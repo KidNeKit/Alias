@@ -1,34 +1,70 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 import '../../resources/colors.dart';
 
-class TeamCard extends StatelessWidget {
+class TeamCard extends StatefulWidget {
+  final bool _isAnimated;
+  const TeamCard({bool isAnimated = false, super.key})
+      : _isAnimated = isAnimated;
+
+  @override
+  State<TeamCard> createState() => _TeamCardState();
+}
+
+class _TeamCardState extends State<TeamCard> with TickerProviderStateMixin {
   final double _cardHeight = 130;
+
   late double _bodyHeight;
   late double _leftPadding;
   late double _cardWidth;
-  TeamCard({super.key});
+  late AnimationController _opacityController;
+
+  double _opacity = 0;
+
+  @override
+  void initState() {
+    _opacityController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1500),
+    );
+    if (widget._isAnimated) {
+      _opacityController.addListener(() {
+        setState(() {
+          _opacity = _opacityController.value;
+        });
+      });
+      _opacityController.forward();
+    } else {
+      _opacity = 1.0;
+    }
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     _bodyHeight = 0.7 * _cardHeight;
     _leftPadding = _cardHeight - _bodyHeight;
-    return LayoutBuilder(builder: (_, constraints) {
-      _cardWidth = constraints.maxWidth;
-
-      return SizedBox(
-        height: _cardHeight,
-        width: double.infinity,
-        child: Stack(
-          children: [
-            _printCardUpper(),
-            _printCardBody(),
-            _printAvatarPadding(),
-            _printAvatar(),
-          ],
-        ),
-      );
-    });
+    return Opacity(
+      opacity: _opacity,
+      child: LayoutBuilder(builder: (_, constraints) {
+        _cardWidth = constraints.maxWidth;
+        return SizedBox(
+          height: _cardHeight,
+          width: double.infinity,
+          child: Stack(
+            children: [
+              _printCardUpper(),
+              _printCardBody(),
+              _printAvatarPadding(),
+              _printAvatar(),
+            ],
+          ),
+        );
+      }),
+    );
   }
 
   Widget _printCardUpper() {
@@ -82,5 +118,11 @@ class TeamCard extends StatelessWidget {
         backgroundColor: lightPurple,
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _opacityController.dispose();
+    super.dispose();
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:alias/views/global_components/team_card.dart';
 import 'package:alias/views/team_stats/team_stats_screen.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +39,7 @@ class TeamsScreen extends StatelessWidget {
               ),
               child: Hero(
                 tag: 'team_$index',
-                child: TeamCard(),
+                child: const TeamCard(isAnimated: true),
               ),
             ),
             separatorBuilder: (context, index) => const SizedBox(height: 10.0),

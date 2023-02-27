@@ -16,7 +16,7 @@ class TeamStatsScreen extends StatelessWidget {
     return BodyWrapper(
       body: Hero(
         tag: 'team_$index',
-        child: TeamCard(),
+        child: const TeamCard(),
       ),
     );
   }
