@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:alias/view_models/teams_view_model.dart';
+import 'package:alias/views/team_stats/team_stats_screen.dart';
 import 'package:alias/views/teams_screen/teams_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -60,6 +61,7 @@ class AliasApp extends StatelessWidget {
           PlayScreen.routeName: (context) => const PlayScreen(),
           TurnResultScreen.routeName: (context) => const TurnResultScreen(),
           TeamsScreen.routeName: (context) => const TeamsScreen(),
+          TeamStatsScreen.routeName: (context) => const TeamStatsScreen(),
         },
       ),
     );

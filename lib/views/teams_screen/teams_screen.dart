@@ -1,4 +1,5 @@
 import 'package:alias/views/global_components/team_card.dart';
+import 'package:alias/views/team_stats/team_stats_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -29,7 +30,16 @@ class TeamsScreen extends StatelessWidget {
           }
           return ListView.separated(
             itemCount: snapshot.data!.length,
-            itemBuilder: (context, index) => TeamCard(),
+            itemBuilder: (context, index) => GestureDetector(
+              onTap: () => Navigator.of(context).pushNamed(
+                TeamStatsScreen.routeName,
+                arguments: {'index': index.toString()},
+              ),
+              child: Hero(
+                tag: 'team_$index',
+                child: TeamCard(),
+              ),
+            ),
             separatorBuilder: (context, index) => const SizedBox(height: 10.0),
           );
         },
