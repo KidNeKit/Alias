@@ -33,6 +33,7 @@ class TeamsList extends StatelessWidget {
             onPressedFunc: () {
               log('pressed');
             },
+            index: index,
           ),
           itemCount: snapshot.data!.length,
           physics: const BouncingScrollPhysics(),

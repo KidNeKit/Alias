@@ -3,45 +3,68 @@ import 'package:flutter/material.dart';
 
 class TeamCardCompressed extends StatefulWidget {
   final Function() _onPressedFunc;
+  final int _index;
 
-  const TeamCardCompressed({required Function() onPressedFunc, super.key})
-      : _onPressedFunc = onPressedFunc;
+  const TeamCardCompressed(
+      {required Function() onPressedFunc, required int index, super.key})
+      : _onPressedFunc = onPressedFunc,
+        _index = index;
 
   @override
   State<TeamCardCompressed> createState() => _TeamCardCompressedState();
 }
 
-class _TeamCardCompressedState extends State<TeamCardCompressed> {
+class _TeamCardCompressedState extends State<TeamCardCompressed>
+    with SingleTickerProviderStateMixin {
   late double _cardHeight;
   late double _bodyHeight;
   late double _avatarPaddingRadius;
   late double _cardWidth;
+  late AnimationController _opacityController;
 
   bool _isSelected = false;
+  bool _isAnimated = false;
+
+  @override
+  void initState() {
+    _opacityController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+    );
+    _opacityController.addListener(() => setState(() {}));
+    Future.delayed(
+      Duration(milliseconds: widget._index * 100),
+      () => _opacityController.forward().then((value) => _isAnimated = true),
+    );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: widget._onPressedFunc,
-      child: LayoutBuilder(builder: (context, constraints) {
-        _cardHeight = constraints.maxHeight;
-        _bodyHeight = 0.8 * _cardHeight;
-        _avatarPaddingRadius = _cardHeight - _bodyHeight;
-        _cardWidth = constraints.maxWidth;
-        return SizedBox(
-          width: constraints.maxWidth,
-          child: Stack(
-            children: [
-              _printCardUpper(),
-              _printCardBody(),
-              _printAvatarPadding(),
-              _printAvatar(),
-              if (_isSelected) _printSelectedLayer(),
-              if (_isSelected) _printSelectedIcon(),
-            ],
-          ),
-        );
-      }),
+    return Opacity(
+      opacity: _opacityController.value,
+      child: GestureDetector(
+        onTap: widget._onPressedFunc,
+        child: LayoutBuilder(builder: (context, constraints) {
+          _cardHeight = constraints.maxHeight;
+          _bodyHeight = 0.8 * _cardHeight;
+          _avatarPaddingRadius = _cardHeight - _bodyHeight;
+          _cardWidth = constraints.maxWidth;
+          return SizedBox(
+            width: constraints.maxWidth,
+            child: Stack(
+              children: [
+                _printCardUpper(),
+                _printCardBody(),
+                _printAvatarPadding(),
+                _printAvatar(),
+                if (_isSelected) _printSelectedLayer(),
+                if (_isSelected) _printSelectedIcon(),
+              ],
+            ),
+          );
+        }),
+      ),
     );
   }
 
@@ -132,5 +155,11 @@ class _TeamCardCompressedState extends State<TeamCardCompressed> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _opacityController.dispose();
+    super.dispose();
   }
 }
