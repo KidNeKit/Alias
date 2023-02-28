@@ -15,6 +15,7 @@ class TeamMemory {
         _name = name;
 
   String get id => _id;
+  String get name => _name;
 
   set setName(String name) => _name = name;
 

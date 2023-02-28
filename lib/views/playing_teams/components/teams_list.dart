@@ -11,6 +11,7 @@ class TeamsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<TeamsViewModel>(context);
     return FutureBuilder(
       future: Provider.of<TeamsViewModel>(context).getTeams(),
       builder: (context, snapshot) {

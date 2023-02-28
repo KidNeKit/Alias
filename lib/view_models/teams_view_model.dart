@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 import '../models/team_memory.dart';
@@ -9,8 +11,8 @@ class TeamsViewModel with ChangeNotifier {
 
   TeamMemory? get team => _team;
 
-  Future<TeamMemory> getTeamById(String id) async {
-    return await _teamsRepository.getTeamById(id);
+  Future<TeamMemory> getTeamById() async {
+    return await _teamsRepository.getTeamById(_team!.id);
   }
 
   Future<List<TeamMemory>> getTeams() async {
@@ -25,16 +27,18 @@ class TeamsViewModel with ChangeNotifier {
     if (teamId == null) {
       _team = TeamMemory.initial();
     } else {
-      _team = await getTeamById(teamId);
+      _team = await _teamsRepository.getTeamById(_team!.id);
     }
   }
 
   void wipeTeamChanges() {
     _team = null;
+    notifyListeners();
   }
 
   void changeTeamName(String name) {
     _team?.setName = name;
+    log('name changed: $name');
     notifyListeners();
   }
 }

@@ -11,7 +11,6 @@ class TeamsRepository extends BaseTeamsRepository {
   Future<TeamMemory> getTeamById(String id) async {
     var prefs = await SharedPreferences.getInstance();
     String team = prefs.getString('teams') ?? '';
-    log('team: $team');
     List<dynamic> jsonList = team.isEmpty ? [] : jsonDecode(team);
     return jsonList
         .map((e) => TeamMemory.fromJson(e))
@@ -22,7 +21,6 @@ class TeamsRepository extends BaseTeamsRepository {
   Future<List<TeamMemory>> getTeams() async {
     var prefs = await SharedPreferences.getInstance();
     String team = prefs.getString('teams') ?? '';
-    log('team: $team');
     List<dynamic> jsonList = team.isEmpty ? [] : jsonDecode(team);
     List<TeamMemory> teams =
         jsonList.map((e) => TeamMemory.fromJson(e)).toList();
@@ -33,9 +31,9 @@ class TeamsRepository extends BaseTeamsRepository {
   Future<TeamMemory> createTeam(TeamMemory team) async {
     var prefs = await SharedPreferences.getInstance();
     List<TeamMemory> teams = await getTeams();
-    teams.add(TeamMemory(id: 'test_id', name: 'Test team'));
+    teams.add(team);
     log(jsonEncode(teams));
-    prefs
+    await prefs
         .setString('teams', jsonEncode(teams))
         .then((isSuccessed) => log('is success: $isSuccessed'));
     return team;

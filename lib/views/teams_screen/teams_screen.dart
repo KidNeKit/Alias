@@ -20,7 +20,7 @@ class TeamsScreen extends StatelessWidget {
             return const Center(
               child: CircularProgressIndicator(),
             );
-          } else if (!snapshot.hasData) {
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
             return Center(
               child: Text(
                 'There is no data',
@@ -33,10 +33,10 @@ class TeamsScreen extends StatelessWidget {
             itemBuilder: (context, index) => GestureDetector(
               onTap: () => Navigator.of(context).pushNamed(
                 TeamInfoScreen.routeName,
-                arguments: {'index': index.toString()},
+                arguments: {'teamId': snapshot.data![index].id},
               ),
               child: Hero(
-                tag: 'team_$index',
+                tag: 'team_${snapshot.data![index].id}',
                 child: const TeamCard(isAnimated: true),
               ),
             ),

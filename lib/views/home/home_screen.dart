@@ -6,6 +6,7 @@ import '../playing_teams/teams_screen.dart';
 import '../global_components/body_wrapper.dart';
 
 class HomeScreen extends StatelessWidget {
+  static const String routeName = '/home';
   const HomeScreen({super.key});
 
   @override

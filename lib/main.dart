@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'resources/theme.dart';
+import 'router/app_router.dart';
 import 'view_models/game_view_model.dart';
 import 'view_models/pack_view_model.dart';
 import 'view_models/teams_view_model.dart';
@@ -19,11 +20,12 @@ import 'views/teams_screen/teams_screen.dart';
 import 'views/turn_result/turn_result_screen.dart';
 
 void main() {
-  runApp(const AliasApp());
+  runApp(AliasApp());
 }
 
 class AliasApp extends StatelessWidget {
-  const AliasApp({super.key});
+  final AppRouter _appRouter = AppRouter();
+  AliasApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -52,17 +54,8 @@ class AliasApp extends StatelessWidget {
       child: MaterialApp(
         theme: lightTheme,
         themeMode: ThemeMode.light,
-        home: const HomeScreen(),
-        routes: {
-          PlayingTeamsScreen.routeName: (context) => const PlayingTeamsScreen(),
-          GameSettingsScreen.routeName: (context) => const GameSettingsScreen(),
-          PackScreen.routeName: (context) => const PackScreen(),
-          LobbyScreen.routeName: (context) => const LobbyScreen(),
-          PlayScreen.routeName: (context) => const PlayScreen(),
-          TurnResultScreen.routeName: (context) => const TurnResultScreen(),
-          TeamsScreen.routeName: (context) => const TeamsScreen(),
-          TeamInfoScreen.routeName: (context) => const TeamInfoScreen(),
-        },
+        onGenerateRoute: _appRouter.onGenerateRoute,
+        initialRoute: HomeScreen.routeName,
       ),
     );
   }
