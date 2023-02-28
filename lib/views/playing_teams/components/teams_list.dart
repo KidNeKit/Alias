@@ -31,6 +31,8 @@ class TeamsList extends StatelessWidget {
             mainAxisSpacing: 15.0,
           ),
           itemBuilder: (context, index) => TeamCardCompressed(
+            teamId: snapshot.data![index].id,
+            teamName: snapshot.data![index].name,
             onPressedFunc: () {
               log('pressed');
             },

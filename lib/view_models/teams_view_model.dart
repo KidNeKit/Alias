@@ -23,12 +23,10 @@ class TeamsViewModel with ChangeNotifier {
     return await _teamsRepository.createTeam(_team!);
   }
 
-  void setEditableTeam({String? teamId}) async {
-    if (teamId == null) {
-      _team = TeamMemory.initial();
-    } else {
-      _team = await _teamsRepository.getTeamById(_team!.id);
-    }
+  void setEditableTeam(String? teamId) async {
+    _team = teamId == null
+        ? TeamMemory.initial()
+        : await _teamsRepository.getTeamById(teamId);
   }
 
   void wipeTeamChanges() {

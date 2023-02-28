@@ -2,12 +2,20 @@ import 'package:alias/resources/colors.dart';
 import 'package:flutter/material.dart';
 
 class TeamCardCompressed extends StatefulWidget {
+  final String _teamId;
+  final String _teamName;
   final Function() _onPressedFunc;
   final int _index;
 
   const TeamCardCompressed(
-      {required Function() onPressedFunc, required int index, super.key})
-      : _onPressedFunc = onPressedFunc,
+      {required String teamId,
+      required String teamName,
+      required Function() onPressedFunc,
+      required int index,
+      super.key})
+      : _teamId = teamId,
+        _teamName = teamName,
+        _onPressedFunc = onPressedFunc,
         _index = index;
 
   @override
@@ -91,9 +99,23 @@ class _TeamCardCompressedState extends State<TeamCardCompressed>
       alignment: Alignment.bottomCenter,
       child: Container(
         height: _bodyHeight,
+        padding: const EdgeInsets.all(10.0).copyWith(bottom: 30.0),
         decoration: BoxDecoration(
           color: lightPurple,
           borderRadius: BorderRadius.circular(20.0),
+        ),
+        child: Align(
+          alignment: Alignment.bottomCenter,
+          child: FittedBox(
+            fit: BoxFit.cover,
+            child: Text(
+              widget._teamName,
+              style: Theme.of(context)
+                  .textTheme
+                  .labelMedium!
+                  .copyWith(color: darkColor),
+            ),
+          ),
         ),
       ),
     );

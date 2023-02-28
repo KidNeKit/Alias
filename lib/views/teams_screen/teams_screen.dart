@@ -33,11 +33,17 @@ class TeamsScreen extends StatelessWidget {
             itemBuilder: (context, index) => GestureDetector(
               onTap: () => Navigator.of(context).pushNamed(
                 TeamInfoScreen.routeName,
-                arguments: {'teamId': snapshot.data![index].id},
+                arguments: {
+                  'teamId': snapshot.data![index].id,
+                  'teamName': snapshot.data![index].name,
+                },
               ),
               child: Hero(
                 tag: 'team_${snapshot.data![index].id}',
-                child: const TeamCard(isAnimated: true),
+                child: TeamCard(
+                  teamName: snapshot.data![index].name,
+                  isAnimated: true,
+                ),
               ),
             ),
             separatorBuilder: (context, index) => const SizedBox(height: 10.0),

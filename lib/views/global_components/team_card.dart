@@ -1,13 +1,14 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 
 import '../../resources/colors.dart';
 
 class TeamCard extends StatefulWidget {
+  final String _teamName;
   final bool _isAnimated;
-  const TeamCard({bool isAnimated = false, super.key})
-      : _isAnimated = isAnimated;
+
+  const TeamCard({String teamName = '', bool isAnimated = false, super.key})
+      : _teamName = teamName,
+        _isAnimated = isAnimated;
 
   @override
   State<TeamCard> createState() => _TeamCardState();
@@ -90,9 +91,21 @@ class _TeamCardState extends State<TeamCard> with TickerProviderStateMixin {
       alignment: Alignment.bottomCenter,
       child: Container(
         height: _bodyHeight,
+        width: double.infinity,
+        padding: const EdgeInsets.all(13.0),
         decoration: BoxDecoration(
           color: lightPurple,
           borderRadius: BorderRadius.circular(20.0),
+        ),
+        child: Align(
+          alignment: Alignment.bottomLeft,
+          child: Text(
+            widget._teamName,
+            style: Theme.of(context)
+                .textTheme
+                .labelMedium!
+                .copyWith(color: darkColor),
+          ),
         ),
       ),
     );

@@ -11,11 +11,14 @@ class TeamInfoScreen extends StatefulWidget {
   static const String routeName = '/team_stats';
 
   final String? _teamId;
+  final String _teamName;
   final bool _isEditing;
 
-  const TeamInfoScreen({bool isEditing = false, String? teamId, super.key})
+  const TeamInfoScreen(
+      {bool isEditing = false, String? teamId, String teamName = '', super.key})
       : _isEditing = isEditing,
-        _teamId = teamId;
+        _teamId = teamId,
+        _teamName = teamName;
 
   @override
   State<TeamInfoScreen> createState() => _TeamInfoScreenState();
@@ -30,7 +33,8 @@ class _TeamInfoScreenState extends State<TeamInfoScreen>
 
   @override
   void initState() {
-    Provider.of<TeamsViewModel>(context, listen: false).setEditableTeam();
+    Provider.of<TeamsViewModel>(context, listen: false)
+        .setEditableTeam(widget._teamId);
     _isEditing = widget._teamId == null ? true : widget._isEditing;
     _opacityController = AnimationController(
       vsync: this,
@@ -84,7 +88,7 @@ class _TeamInfoScreenState extends State<TeamInfoScreen>
           tag: 'team_${widget._teamId}',
           child: Column(
             children: [
-              const TeamCard(),
+              TeamCard(teamName: widget._teamName),
               Visibility(
                 visible: _isInitialized,
                 child: Opacity(

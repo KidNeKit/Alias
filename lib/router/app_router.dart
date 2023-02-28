@@ -32,8 +32,12 @@ class AppRouter {
         return MaterialPageRoute(builder: (ctx) => const TeamsScreen());
       case TeamInfoScreen.routeName:
         String? teamId = args['teamId'];
+        String teamName = args['teamName'] ?? '';
         return MaterialPageRoute(
-          builder: (ctx) => TeamInfoScreen(teamId: teamId),
+          builder: (ctx) => TeamInfoScreen(
+            teamId: teamId,
+            teamName: teamName,
+          ),
         );
       default:
         return null;
