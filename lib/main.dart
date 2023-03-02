@@ -33,8 +33,20 @@ class AliasApp extends StatelessWidget {
         ChangeNotifierProvider<PackViewModel>(
           create: (context) => PackViewModel(),
         ),
-        ChangeNotifierProvider<GameViewModel>(
-          create: (context) => GameViewModel(),
+        ChangeNotifierProxyProvider<GameSettingsViewModel, GameViewModel>(
+          create: (context) => GameViewModel.initial(),
+          update: (context, value, previous) {
+            if (value.isConfigured) {
+              log('configured');
+              return GameViewModel(
+                teams: value.teams,
+                pack: value.selectedPack!,
+                level: value.level!,
+                winPoints: value.winPoints!,
+              );
+            }
+            return previous ?? GameViewModel.initial();
+          },
         ),
         ChangeNotifierProxyProvider<GameViewModel, TurnViewModel>(
           create: (context) => TurnViewModel(),

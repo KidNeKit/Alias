@@ -1,3 +1,4 @@
+import 'package:alias/view_models/game_settings_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -9,7 +10,7 @@ class SelectedPack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<GameViewModel>(
+    return Consumer<GameSettingsViewModel>(
       builder: (context, value, child) => Container(
         height: 100,
         width: double.infinity,
@@ -36,7 +37,7 @@ class SelectedPack extends StatelessWidget {
                 visible: value.selectedPack != null,
                 child: GestureDetector(
                   onTap: () {
-                    value.clearPack();
+                    value.setPack = null;
                   },
                   child: const Icon(
                     Icons.cancel_rounded,

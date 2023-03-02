@@ -16,7 +16,7 @@ class BottomButtons extends StatelessWidget {
           builder: (context, value, child) => CustomButton(
             text: 'Back',
             onPressedFunc: () {
-              value.wipeGameSettings();
+              value.wipeTeams();
               Navigator.of(context).pop();
             },
           ),

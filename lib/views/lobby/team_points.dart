@@ -1,8 +1,8 @@
-import 'package:alias/resources/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../models/team.dart';
+import '../../models/team_playing.dart';
+import '../../resources/colors.dart';
 import '../../view_models/game_view_model.dart';
 
 class TeamPoints extends StatelessWidget {
@@ -25,9 +25,10 @@ class TeamPoints extends StatelessWidget {
 }
 
 class TeamPointItem extends StatelessWidget {
-  final Team _team;
+  final TeamPlaying _team;
   final bool _isPlaying;
-  const TeamPointItem({required Team team, required bool isPlaying, super.key})
+  const TeamPointItem(
+      {required TeamPlaying team, required bool isPlaying, super.key})
       : _team = team,
         _isPlaying = isPlaying;
 
@@ -47,7 +48,7 @@ class TeamPointItem extends StatelessWidget {
         children: [
           Expanded(
             child: Text(
-              _team.name,
+              _team.teamName,
               style: Theme.of(context).textTheme.labelSmall,
             ),
           ),

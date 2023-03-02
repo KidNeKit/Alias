@@ -3,7 +3,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 
-import '../models/team.dart';
+import '../models/team_playing.dart';
 import 'game_view_model.dart';
 
 class TurnViewModel with ChangeNotifier {
@@ -16,7 +16,7 @@ class TurnViewModel with ChangeNotifier {
   int _secondsLeft = _initialTurnTime;
   int _wordIndex = 0;
 
-  late Team _currentTeam;
+  late TeamPlaying _currentTeam;
   late Sink _streamSink;
 
   String get currentWord => _packWords[_wordIndex];
