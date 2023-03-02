@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../resources/colors.dart';
-
 class BodyWrapper extends StatelessWidget {
   final Widget _body;
   final Icon? _floatingIcon;
@@ -18,7 +16,7 @@ class BodyWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: darkColor,
+      backgroundColor: Theme.of(context).backgroundColor,
       body: SafeArea(
         child: Container(
           width: double.infinity,

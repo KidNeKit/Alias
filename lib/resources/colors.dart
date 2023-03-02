@@ -1,4 +1,4 @@
-import 'package:flutter/animation.dart';
+import 'package:flutter/material.dart';
 
 //Color pack original
 Color darkColor = const Color(0xFF20262E);
@@ -14,3 +14,8 @@ Color lightYellow = const Color(0xFFFFF4D2);
 
 Color backgroundColor = lightViolet;
 Color buttonColor = lightYellow;
+
+Color deepGrey = const Color(0xFF567189);
+Color lightGrey = const Color(0xFF7B8FA1);
+Color sandColor = const Color(0xFFCFB997);
+Color goldColor = const Color(0xFFFAD6A5);
