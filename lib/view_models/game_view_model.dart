@@ -24,14 +24,6 @@ class GameViewModel with ChangeNotifier {
 
   GameViewModel.initial() {
     log('created subscription');
-    turnResults.listen((value) {
-      log('message received: $value');
-      playingTeam.addPoints(value);
-      if (playingTeam.points >= _winPoints!.value) {
-        _isLastTurn = true;
-      }
-      nextTeamTurn();
-    });
   }
 
   GameViewModel({
