@@ -21,18 +21,21 @@ TextStyle labelLarge = TextStyle(
   color: goldColor,
   fontWeight: FontWeight.bold,
   fontSize: 40.0,
+  fontFamily: 'Signika_Negative',
 );
 
 TextStyle labelMedium = TextStyle(
   color: goldColor,
   fontWeight: FontWeight.bold,
   fontSize: 30.0,
+  fontFamily: 'Signika_Negative',
 );
 
 TextStyle labelSmall = TextStyle(
   color: goldColor,
   fontWeight: FontWeight.bold,
   fontSize: 20.0,
+  fontFamily: 'Signika_Negative',
 );
 
 ButtonStyle buttonStyle = ElevatedButton.styleFrom(
