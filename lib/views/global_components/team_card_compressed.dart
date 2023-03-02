@@ -1,20 +1,20 @@
+import 'package:alias/models/team_memory.dart';
 import 'package:alias/resources/colors.dart';
+import 'package:alias/view_models/game_settings_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class TeamCardCompressed extends StatefulWidget {
-  final String _teamId;
-  final String _teamName;
+  final TeamMemory _team;
   final Function() _onPressedFunc;
   final int _index;
 
   const TeamCardCompressed(
-      {required String teamId,
-      required String teamName,
+      {required TeamMemory team,
       required Function() onPressedFunc,
       required int index,
       super.key})
-      : _teamId = teamId,
-        _teamName = teamName,
+      : _team = team,
         _onPressedFunc = onPressedFunc,
         _index = index;
 
@@ -30,7 +30,6 @@ class _TeamCardCompressedState extends State<TeamCardCompressed>
   late double _cardWidth;
   late AnimationController _opacityController;
 
-  bool _isSelected = false;
   bool _isAnimated = false;
 
   @override
@@ -58,19 +57,23 @@ class _TeamCardCompressedState extends State<TeamCardCompressed>
           _bodyHeight = 0.8 * _cardHeight;
           _avatarPaddingRadius = _cardHeight - _bodyHeight;
           _cardWidth = constraints.maxWidth;
-          return SizedBox(
-            width: constraints.maxWidth,
-            child: Stack(
-              children: [
-                _printCardUpper(),
-                _printCardBody(),
-                _printAvatarPadding(),
-                _printAvatar(),
-                if (_isSelected) _printSelectedLayer(),
-                if (_isSelected) _printSelectedIcon(),
-              ],
-            ),
-          );
+          return Consumer<GameSettingsViewModel>(
+              builder: (context, value, child) {
+            bool isTeamSelected = value.isTeamSelected(widget._team.id);
+            return SizedBox(
+              width: constraints.maxWidth,
+              child: Stack(
+                children: [
+                  _printCardUpper(),
+                  _printCardBody(),
+                  _printAvatarPadding(),
+                  _printAvatar(),
+                  if (isTeamSelected) _printSelectedLayer(),
+                  if (isTeamSelected) _printSelectedIcon(),
+                ],
+              ),
+            );
+          });
         }),
       ),
     );
@@ -109,7 +112,7 @@ class _TeamCardCompressedState extends State<TeamCardCompressed>
           child: FittedBox(
             fit: BoxFit.cover,
             child: Text(
-              widget._teamName,
+              widget._team.name,
               style: Theme.of(context)
                   .textTheme
                   .labelMedium!

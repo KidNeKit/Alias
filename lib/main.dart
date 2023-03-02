@@ -5,19 +5,12 @@ import 'package:provider/provider.dart';
 
 import 'resources/theme.dart';
 import 'router/app_router.dart';
+import 'view_models/game_settings_view_model.dart';
 import 'view_models/game_view_model.dart';
 import 'view_models/pack_view_model.dart';
 import 'view_models/teams_view_model.dart';
 import 'view_models/turn_view_model.dart';
-import 'views/game_settings/game_settings_screen.dart';
 import 'views/home/home_screen.dart';
-import 'views/lobby/lobby_screen.dart';
-import 'views/pack/pack_screen.dart';
-import 'views/play_screen/play_screen.dart';
-import 'views/playing_teams/teams_screen.dart';
-import 'views/team_info/team_info_screen.dart';
-import 'views/teams_screen/teams_screen.dart';
-import 'views/turn_result/turn_result_screen.dart';
 
 void main() {
   runApp(AliasApp());
@@ -33,6 +26,9 @@ class AliasApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<TeamsViewModel>(
           create: (context) => TeamsViewModel(),
+        ),
+        ChangeNotifierProvider<GameSettingsViewModel>(
+          create: (context) => GameSettingsViewModel(),
         ),
         ChangeNotifierProvider<PackViewModel>(
           create: (context) => PackViewModel(),

@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:alias/view_models/game_settings_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -31,10 +32,10 @@ class TeamsList extends StatelessWidget {
             mainAxisSpacing: 15.0,
           ),
           itemBuilder: (context, index) => TeamCardCompressed(
-            teamId: snapshot.data![index].id,
-            teamName: snapshot.data![index].name,
+            team: snapshot.data![index],
             onPressedFunc: () {
-              log('pressed');
+              Provider.of<GameSettingsViewModel>(context, listen: false)
+                  .selectTeam(snapshot.data![index]);
             },
             index: index,
           ),

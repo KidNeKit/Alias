@@ -1,5 +1,8 @@
+import 'package:alias/views/playing_teams/bottom_buttons.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../view_models/game_settings_view_model.dart';
 import '../global_components/body_wrapper.dart';
 import '../team_info/team_info_screen.dart';
 import 'components/teams_list.dart';
@@ -48,15 +51,19 @@ class PlayingTeamsScreen extends StatelessWidget {
           const SizedBox(height: 10.0),
           Align(
             alignment: Alignment.centerRight,
-            child: Text(
-              '0 / 4',
-              style: Theme.of(context).textTheme.labelMedium,
-            ),
+            child: Consumer<GameSettingsViewModel>(
+                builder: (context, value, child) {
+              return Text(
+                '${value.teamQuantity} / 4',
+                style: Theme.of(context).textTheme.labelMedium,
+              );
+            }),
           ),
           const SizedBox(height: 10.0),
           const Expanded(
             child: TeamsList(),
           ),
+          const BottomButtons(),
         ],
       ),
     );
