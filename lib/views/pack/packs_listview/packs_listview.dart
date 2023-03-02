@@ -1,3 +1,4 @@
+import 'package:alias/view_models/game_settings_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -35,7 +36,7 @@ class _PacksListViewState extends State<PacksListView> {
             ? const Center(
                 child: CircularProgressIndicator(),
               )
-            : Consumer<GameViewModel>(
+            : Consumer<GameSettingsViewModel>(
                 builder: (context, gameValue, child) => ListView.separated(
                   itemCount: value.packs.length,
                   separatorBuilder: (context, index) =>

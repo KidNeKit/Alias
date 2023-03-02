@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../view_models/game_view_model.dart';
-import '../components/custom_button.dart';
+import '../../view_models/game_settings_view_model.dart';
+import '../global_components/custom_button.dart';
 import '../lobby/lobby_screen.dart';
 
 class BottomButtons extends StatelessWidget {
@@ -10,13 +10,13 @@ class BottomButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<GameViewModel>(
+    return Consumer<GameSettingsViewModel>(
       builder: (context, value, child) => Row(
         children: [
           CustomButton(
             text: 'Back',
             onPressedFunc: () {
-              value.clearGameData();
+              value.wipePack();
               Navigator.of(context).pop();
             },
           ),
@@ -24,7 +24,7 @@ class BottomButtons extends StatelessWidget {
           CustomButton(
             text: 'Continue',
             onPressedFunc: () {
-              if (!value.isDataValid()) {
+              if (!value.isPackValid()) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                     duration: Duration(seconds: 1),
