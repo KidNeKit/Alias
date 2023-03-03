@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../view_models/game_settings_view_model.dart';
 import '../game_settings/game_settings_screen.dart';
 import '../global_components/custom_button.dart';
+import '../global_components/error_snackbar_body.dart';
 
 class BottomButtons extends StatelessWidget {
   const BottomButtons({super.key});
@@ -31,8 +32,12 @@ class BottomButtons extends StatelessWidget {
             if (!isValid) {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
-                  duration: Duration(seconds: 1),
-                  content: Text('Please select 2-4 teams'),
+                  behavior: SnackBarBehavior.floating,
+                  duration: Duration(milliseconds: 3000),
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  content:
+                      ErrorSnackbarBody(errorText: 'Please select 2-4 teams'),
                 ),
               );
             } else {

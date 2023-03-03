@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../view_models/game_settings_view_model.dart';
 import '../../global_components/custom_button.dart';
+import '../../global_components/error_snackbar_body.dart';
 import '../../lobby/lobby_screen.dart';
 
 class BottomButtons extends StatelessWidget {
@@ -11,7 +12,7 @@ class BottomButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<GameSettingsViewModel>(
-      builder: (context, value, child) => Row(
+      builder: (ctx, value, child) => Row(
         children: [
           CustomButton(
             text: 'Back',
@@ -27,8 +28,12 @@ class BottomButtons extends StatelessWidget {
               if (!value.isPackValid()) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
-                    duration: Duration(seconds: 1),
-                    content: Text('Please select all fields'),
+                    behavior: SnackBarBehavior.floating,
+                    duration: Duration(milliseconds: 3000),
+                    backgroundColor: Colors.transparent,
+                    elevation: 0,
+                    content: ErrorSnackbarBody(
+                        errorText: 'Please select all fields'),
                   ),
                 );
               } else {

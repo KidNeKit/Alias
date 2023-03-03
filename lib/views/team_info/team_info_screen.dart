@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../router/fade_page_route_builder.dart';
 import '../../view_models/teams_view_model.dart';
 import '../global_components/body_wrapper.dart';
 import '../global_components/team_card.dart';
@@ -38,13 +39,13 @@ class _TeamInfoScreenState extends State<TeamInfoScreen>
     _isEditing = widget._teamId == null ? true : widget._isEditing;
     _opacityController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 500),
+      duration: FadePageRouteBuilder.pageTransitionDuration,
     );
     _opacityController.addListener(() {
       setState(() {});
     });
     Future.delayed(
-      const Duration(milliseconds: 200),
+      FadePageRouteBuilder.pageTransitionDuration,
       () {
         _isInitialized = true;
         _opacityController.forward();
@@ -79,7 +80,7 @@ class _TeamInfoScreenState extends State<TeamInfoScreen>
           } else {
             _opacityController.reverse().then((value) {
               _isEditing = !_isEditing;
-              Future.delayed(const Duration(milliseconds: 300),
+              Future.delayed(FadePageRouteBuilder.pageTransitionDuration,
                   () => _opacityController.forward());
             });
           }
