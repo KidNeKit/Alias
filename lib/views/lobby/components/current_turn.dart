@@ -1,6 +1,8 @@
-import 'package:alias/view_models/game_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../../view_models/game_view_model.dart';
+import '../../global_components/text/custom_titles.dart';
 
 class CurrentTurn extends StatelessWidget {
   const CurrentTurn({super.key});
@@ -12,9 +14,8 @@ class CurrentTurn extends StatelessWidget {
       child: Align(
         alignment: Alignment.centerRight,
         child: Consumer<GameViewModel>(
-          builder: (context, value, child) => Text(
-            'Turn ${value.turn}',
-            style: Theme.of(context).textTheme.labelMedium,
+          builder: (context, value, child) => CustomMediumTitle(
+            text: 'Turn ${value.turn}',
           ),
         ),
       ),

@@ -1,6 +1,9 @@
-import 'package:alias/resources/colors.dart';
-import 'package:alias/views/play_screen/play_screen.dart';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+
+import '../../global_components/text/custom_titles.dart';
+import '../../play_screen/play_screen.dart';
 
 class PlayButton extends StatelessWidget {
   const PlayButton({super.key});
@@ -18,13 +21,10 @@ class PlayButton extends StatelessWidget {
           width: 0.5 * screenWidth,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: primaryColor,
+            color: Theme.of(context).primaryColor,
           ),
-          child: Center(
-            child: Text(
-              'PLAY',
-              style: Theme.of(context).textTheme.labelMedium,
-            ),
+          child: const Center(
+            child: CustomMediumTitle(text: 'PLAY'),
           ),
         ),
       ),

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../models/team_playing.dart';
-import '../../resources/colors.dart';
-import '../../view_models/game_view_model.dart';
+import '../../../models/team_playing.dart';
+import '../../../resources/colors.dart';
+import '../../../view_models/game_view_model.dart';
+import '../../global_components/text/custom_titles.dart';
 
 class TeamPoints extends StatelessWidget {
   const TeamPoints({super.key});
@@ -40,22 +41,21 @@ class TeamPointItem extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 5.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
-        color: primaryColor,
-        border: _isPlaying ? Border.all(color: Colors.amber, width: 2.0) : null,
+        color: Theme.of(context).primaryColor,
+        border: _isPlaying
+            ? Border.all(
+                color: Theme.of(context).cardColor,
+                width: 3.0,
+              )
+            : null,
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Expanded(
-            child: Text(
-              _team.teamName,
-              style: Theme.of(context).textTheme.labelSmall,
-            ),
+            child: CustomSmallTitle(text: _team.teamName),
           ),
-          Text(
-            _team.points.toString(),
-            style: Theme.of(context).textTheme.labelSmall,
-          ),
+          CustomSmallTitle(text: _team.points.toString()),
         ],
       ),
     );

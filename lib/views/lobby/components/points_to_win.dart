@@ -1,6 +1,8 @@
-import 'package:alias/view_models/game_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../../view_models/game_view_model.dart';
+import '../../global_components/text/custom_titles.dart';
 
 class PointsToWin extends StatelessWidget {
   const PointsToWin({super.key});
@@ -10,16 +12,11 @@ class PointsToWin extends StatelessWidget {
     return Row(
       children: [
         Consumer<GameViewModel>(
-          builder: (context, value, child) => Text(
-            value.winPoints!.value.toString(),
-            style: Theme.of(context).textTheme.labelLarge,
-          ),
+          builder: (context, value, child) =>
+              CustomLargeTitle(text: value.winPoints!.value.toString()),
         ),
         const SizedBox(width: 10.0),
-        Text(
-          'points to win',
-          style: Theme.of(context).textTheme.labelMedium,
-        ),
+        const CustomMediumTitle(text: 'points to win'),
       ],
     );
   }
