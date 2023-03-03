@@ -38,6 +38,7 @@ class PlayingTeamsScreen extends StatelessWidget {
           const Expanded(
             child: TeamsList(),
           ),
+          const SizedBox(height: 10.0),
           const BottomButtons(),
         ],
       ),

@@ -1,8 +1,9 @@
-import 'package:alias/views/pack/seleted_pack/selected_pack.dart';
 import 'package:flutter/material.dart';
 
-import '../../resources/colors.dart';
-import 'packs_listview/packs_listview.dart';
+import '../global_components/body_wrapper_animated.dart';
+import '../global_components/text/custom_titles.dart';
+import 'components/packs_listview.dart';
+import 'components/selected_pack.dart';
 
 class PackScreen extends StatelessWidget {
   static const String routeName = '/pack_screen';
@@ -10,33 +11,20 @@ class PackScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: darkColor,
-      body: SafeArea(
-        child: Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(15.0),
-          child: Column(
-            children: [
-              Text(
-                'Packs catalogue',
-                style: Theme.of(context).textTheme.labelMedium,
-              ),
-              const SizedBox(height: 10.0),
-              const PacksListView(),
-              const SizedBox(height: 10.0),
-              const SelectedPack(),
-              const SizedBox(height: 10.0),
-              ElevatedButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: Text(
-                  'Back',
-                  style: Theme.of(context).textTheme.labelSmall,
-                ),
-              ),
-            ],
+    return BodyWrapperAnimated(
+      body: Column(
+        children: [
+          const CustomMediumTitle(text: 'Packs catalogue'),
+          const SizedBox(height: 10.0),
+          const PacksListView(),
+          const SizedBox(height: 10.0),
+          const SelectedPack(),
+          const SizedBox(height: 10.0),
+          ElevatedButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const CustomSmallTitle(text: 'Back'),
           ),
-        ),
+        ],
       ),
     );
   }

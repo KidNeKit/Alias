@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../resources/colors.dart';
 import '../global_components/body_wrapper.dart';
 import '../global_components/custom_button.dart';
-import '../global_components/text/custom_title.dart';
+import '../global_components/text/custom_titles.dart';
 import '../playing_teams/teams_screen.dart';
 import '../teams_screen/teams_screen.dart';
 
@@ -19,7 +19,7 @@ class HomeScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const Spacer(),
-          const CustomTitle(text: 'Welcome Back!'),
+          const CustomLargeTitle(text: 'Welcome Back!'),
           const SizedBox(height: 15.0),
           CustomButton(
             text: 'Start',

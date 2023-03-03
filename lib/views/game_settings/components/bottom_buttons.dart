@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../view_models/game_settings_view_model.dart';
-import '../global_components/custom_button.dart';
-import '../lobby/lobby_screen.dart';
+import '../../../view_models/game_settings_view_model.dart';
+import '../../global_components/custom_button.dart';
+import '../../lobby/lobby_screen.dart';
 
 class BottomButtons extends StatelessWidget {
   const BottomButtons({super.key});

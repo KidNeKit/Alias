@@ -11,7 +11,7 @@ class PackRepository {
     'footballers',
   };
 
-  Future<List<Pack>> loadPacks() async {
+  Future<List<Pack>> getPacks() async {
     List<Pack> packs = [];
     for (var jsonPack in _packNames) {
       final String response =
