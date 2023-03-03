@@ -3,13 +3,13 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../router/fade_page_route_builder.dart';
 import '../../view_models/teams_view_model.dart';
 import '../global_components/body_wrapper.dart';
 import '../global_components/team_card.dart';
 
 class TeamInfoScreen extends StatefulWidget {
   static const String routeName = '/team_stats';
+  static const Duration editSwapDuration = Duration(milliseconds: 250);
 
   final String? _teamId;
   final String _teamName;
@@ -39,13 +39,13 @@ class _TeamInfoScreenState extends State<TeamInfoScreen>
     _isEditing = widget._teamId == null ? true : widget._isEditing;
     _opacityController = AnimationController(
       vsync: this,
-      duration: FadePageRouteBuilder.pageTransitionDuration,
+      duration: TeamInfoScreen.editSwapDuration,
     );
     _opacityController.addListener(() {
       setState(() {});
     });
     Future.delayed(
-      FadePageRouteBuilder.pageTransitionDuration,
+      TeamInfoScreen.editSwapDuration,
       () {
         _isInitialized = true;
         _opacityController.forward();
@@ -80,7 +80,7 @@ class _TeamInfoScreenState extends State<TeamInfoScreen>
           } else {
             _opacityController.reverse().then((value) {
               _isEditing = !_isEditing;
-              Future.delayed(FadePageRouteBuilder.pageTransitionDuration,
+              Future.delayed(TeamInfoScreen.editSwapDuration,
                   () => _opacityController.forward());
             });
           }

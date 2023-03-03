@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:alias/router/fade_page_route_builder.dart';
 import 'package:flutter/material.dart';
 
 class FadeAnimation extends StatefulWidget {
@@ -40,9 +41,21 @@ class _FadeAnimationState extends State<FadeAnimation>
 
   @override
   Widget build(BuildContext context) {
-    return FadeTransition(
-      opacity: _opacityController,
-      child: widget._child,
+    return WillPopScope(
+      onWillPop: () async {
+        await _opacityController.reverse();
+        return true;
+      },
+      child: FadeTransition(
+        opacity: _opacityController,
+        child: widget._child,
+      ),
     );
+  }
+
+  @override
+  void dispose() {
+    _opacityController.dispose();
+    super.dispose();
   }
 }

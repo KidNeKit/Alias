@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../view_models/game_settings_view_model.dart';
-import '../game_settings/game_settings_screen.dart';
-import '../global_components/custom_button.dart';
-import '../global_components/error_snackbar_body.dart';
+import '../../../view_models/game_settings_view_model.dart';
+import '../../game_settings/game_settings_screen.dart';
+import '../../global_components/custom_button.dart';
+import '../../global_components/error_snackbar_body.dart';
 
 class BottomButtons extends StatelessWidget {
   const BottomButtons({super.key});
