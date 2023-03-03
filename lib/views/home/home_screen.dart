@@ -1,9 +1,11 @@
-import 'package:alias/views/teams_screen/teams_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../resources/colors.dart';
-import '../playing_teams/teams_screen.dart';
 import '../global_components/body_wrapper.dart';
+import '../global_components/custom_button.dart';
+import '../global_components/text/custom_title.dart';
+import '../playing_teams/teams_screen.dart';
+import '../teams_screen/teams_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   static const String routeName = '/home';
@@ -17,27 +19,18 @@ class HomeScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const Spacer(),
-          Text(
-            'Welcome Back!',
-            style: Theme.of(context).textTheme.labelMedium,
-          ),
+          const CustomTitle(text: 'Welcome Back!'),
           const SizedBox(height: 15.0),
-          ElevatedButton(
-            onPressed: () =>
+          CustomButton(
+            text: 'Start',
+            onPressedFunc: () =>
                 Navigator.of(context).pushNamed(PlayingTeamsScreen.routeName),
-            child: Text(
-              'Start',
-              style: Theme.of(context).textTheme.labelSmall,
-            ),
           ),
           const SizedBox(height: 10.0),
-          ElevatedButton(
-            onPressed: () =>
+          CustomButton(
+            text: 'Teams',
+            onPressedFunc: () =>
                 Navigator.of(context).pushNamed(TeamsScreen.routeName),
-            child: Text(
-              'Teams',
-              style: Theme.of(context).textTheme.labelSmall,
-            ),
           ),
           const Spacer(),
           Align(

@@ -1,3 +1,4 @@
+import 'package:alias/router/fade_page_route_builder.dart';
 import 'package:flutter/material.dart';
 
 import '../views/game_settings/game_settings_screen.dart';
@@ -15,21 +16,21 @@ class AppRouter {
     var args = (settings.arguments ?? {}) as Map<dynamic, dynamic>;
     switch (settings.name) {
       case HomeScreen.routeName:
-        return MaterialPageRoute(builder: (ctx) => const HomeScreen());
+        return FadePageRouteBuilder(child: const HomeScreen());
       case PlayingTeamsScreen.routeName:
-        return MaterialPageRoute(builder: (ctx) => const PlayingTeamsScreen());
+        return FadePageRouteBuilder(child: const PlayingTeamsScreen());
       case GameSettingsScreen.routeName:
-        return MaterialPageRoute(builder: (ctx) => const GameSettingsScreen());
+        return FadePageRouteBuilder(child: const GameSettingsScreen());
       case PackScreen.routeName:
-        return MaterialPageRoute(builder: (ctx) => const PackScreen());
+        return FadePageRouteBuilder(child: const PackScreen());
       case LobbyScreen.routeName:
-        return MaterialPageRoute(builder: (ctx) => const LobbyScreen());
+        return FadePageRouteBuilder(child: const LobbyScreen());
       case PlayScreen.routeName:
-        return MaterialPageRoute(builder: (ctx) => const PlayScreen());
+        return FadePageRouteBuilder(child: const PlayScreen());
       case TurnResultScreen.routeName:
-        return MaterialPageRoute(builder: (ctx) => const TurnResultScreen());
+        return FadePageRouteBuilder(child: const TurnResultScreen());
       case TeamsScreen.routeName:
-        return MaterialPageRoute(builder: (ctx) => const TeamsScreen());
+        return FadePageRouteBuilder(child: const TeamsScreen());
       case TeamInfoScreen.routeName:
         String? teamId = args['teamId'];
         String teamName = args['teamName'] ?? '';

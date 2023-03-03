@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../view_models/teams_view_model.dart';
-import '../global_components/body_wrapper.dart';
+import '../global_components/body_wrapper_animated.dart';
 import '../global_components/team_card.dart';
 import '../team_info/team_info_screen.dart';
 
@@ -12,7 +12,7 @@ class TeamsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BodyWrapper(
+    return BodyWrapperAnimated(
       body: FutureBuilder(
         future: Provider.of<TeamsViewModel>(context).getTeams(),
         builder: (context, snapshot) {
@@ -42,7 +42,6 @@ class TeamsScreen extends StatelessWidget {
                 tag: 'team_${snapshot.data![index].id}',
                 child: TeamCard(
                   teamName: snapshot.data![index].name,
-                  isAnimated: true,
                 ),
               ),
             ),

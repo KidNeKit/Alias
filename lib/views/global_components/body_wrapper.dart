@@ -17,19 +17,27 @@ class BodyWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
-      body: SafeArea(
-        child: Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(15.0),
-          child: _body,
-        ),
-      ),
       floatingActionButton: _floatingFunc == null
           ? null
           : FloatingActionButton(
               onPressed: _floatingFunc,
               child: _floatingIcon,
             ),
+      body: buildBody(),
+    );
+  }
+
+  Widget buildBody() {
+    return buildChild();
+  }
+
+  Widget buildChild() {
+    return SafeArea(
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(15.0),
+        child: _body,
+      ),
     );
   }
 }

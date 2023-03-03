@@ -37,7 +37,6 @@ class TeamsList extends StatelessWidget {
               Provider.of<GameSettingsViewModel>(context, listen: false)
                   .selectTeam(snapshot.data![index]);
             },
-            index: index,
           ),
           itemCount: snapshot.data!.length,
           physics: const BouncingScrollPhysics(),

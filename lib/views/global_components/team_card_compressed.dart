@@ -7,16 +7,11 @@ import 'package:provider/provider.dart';
 class TeamCardCompressed extends StatefulWidget {
   final TeamMemory _team;
   final Function() _onPressedFunc;
-  final int _index;
 
   const TeamCardCompressed(
-      {required TeamMemory team,
-      required Function() onPressedFunc,
-      required int index,
-      super.key})
+      {required TeamMemory team, required Function() onPressedFunc, super.key})
       : _team = team,
-        _onPressedFunc = onPressedFunc,
-        _index = index;
+        _onPressedFunc = onPressedFunc;
 
   @override
   State<TeamCardCompressed> createState() => _TeamCardCompressedState();
@@ -28,54 +23,34 @@ class _TeamCardCompressedState extends State<TeamCardCompressed>
   late double _bodyHeight;
   late double _avatarPaddingRadius;
   late double _cardWidth;
-  late AnimationController _opacityController;
-
-  bool _isAnimated = false;
-
-  @override
-  void initState() {
-    _opacityController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 300),
-    );
-    _opacityController.addListener(() => setState(() {}));
-    Future.delayed(
-      Duration(milliseconds: widget._index * 100),
-      () => _opacityController.forward().then((value) => _isAnimated = true),
-    );
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
-    return Opacity(
-      opacity: _opacityController.value,
-      child: GestureDetector(
-        onTap: widget._onPressedFunc,
-        child: LayoutBuilder(builder: (context, constraints) {
-          _cardHeight = constraints.maxHeight;
-          _bodyHeight = 0.8 * _cardHeight;
-          _avatarPaddingRadius = _cardHeight - _bodyHeight;
-          _cardWidth = constraints.maxWidth;
-          return Consumer<GameSettingsViewModel>(
-              builder: (context, value, child) {
-            bool isTeamSelected = value.isTeamSelected(widget._team.id);
-            return SizedBox(
-              width: constraints.maxWidth,
-              child: Stack(
-                children: [
-                  _printCardUpper(),
-                  _printCardBody(),
-                  _printAvatarPadding(),
-                  _printAvatar(),
-                  if (isTeamSelected) _printSelectedLayer(),
-                  if (isTeamSelected) _printSelectedIcon(),
-                ],
-              ),
-            );
-          });
-        }),
-      ),
+    return GestureDetector(
+      onTap: widget._onPressedFunc,
+      child: LayoutBuilder(builder: (context, constraints) {
+        _cardHeight = constraints.maxHeight;
+        _bodyHeight = 0.8 * _cardHeight;
+        _avatarPaddingRadius = _cardHeight - _bodyHeight;
+        _cardWidth = constraints.maxWidth;
+        return Consumer<GameSettingsViewModel>(
+            builder: (context, value, child) {
+          bool isTeamSelected = value.isTeamSelected(widget._team.id);
+          return SizedBox(
+            width: constraints.maxWidth,
+            child: Stack(
+              children: [
+                _printCardUpper(),
+                _printCardBody(),
+                _printAvatarPadding(),
+                _printAvatar(),
+                if (isTeamSelected) _printSelectedLayer(),
+                if (isTeamSelected) _printSelectedIcon(),
+              ],
+            ),
+          );
+        });
+      }),
     );
   }
 
@@ -112,7 +87,7 @@ class _TeamCardCompressedState extends State<TeamCardCompressed>
           child: FittedBox(
             fit: BoxFit.cover,
             child: Text(
-              widget._team.name,
+              widget._team.name.isEmpty ? 'empty name' : widget._team.name,
               style: Theme.of(context)
                   .textTheme
                   .labelMedium!
@@ -180,11 +155,5 @@ class _TeamCardCompressedState extends State<TeamCardCompressed>
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _opacityController.dispose();
-    super.dispose();
   }
 }

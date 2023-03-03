@@ -4,53 +4,26 @@ import '../../resources/colors.dart';
 
 class TeamCard extends StatefulWidget {
   final String _teamName;
-  final bool _isAnimated;
 
-  const TeamCard({String teamName = '', bool isAnimated = false, super.key})
-      : _teamName = teamName,
-        _isAnimated = isAnimated;
+  const TeamCard({String teamName = '', super.key}) : _teamName = teamName;
 
   @override
   State<TeamCard> createState() => _TeamCardState();
 }
 
-class _TeamCardState extends State<TeamCard> with TickerProviderStateMixin {
+class _TeamCardState extends State<TeamCard> {
   final double _cardHeight = 130;
 
   late double _bodyHeight;
   late double _leftPadding;
   late double _cardWidth;
-  late AnimationController _opacityController;
-
-  double _opacity = 0;
-
-  @override
-  void initState() {
-    _opacityController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 1500),
-    );
-    if (widget._isAnimated) {
-      _opacityController.addListener(() {
-        setState(() {
-          _opacity = _opacityController.value;
-        });
-      });
-      _opacityController.forward();
-    } else {
-      _opacity = 1.0;
-    }
-
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     _bodyHeight = 0.7 * _cardHeight;
     _leftPadding = _cardHeight - _bodyHeight;
-    return Opacity(
-      opacity: _opacity,
-      child: LayoutBuilder(builder: (_, constraints) {
+    return LayoutBuilder(
+      builder: (_, constraints) {
         _cardWidth = constraints.maxWidth;
         return SizedBox(
           height: _cardHeight,
@@ -64,7 +37,7 @@ class _TeamCardState extends State<TeamCard> with TickerProviderStateMixin {
             ],
           ),
         );
-      }),
+      },
     );
   }
 
@@ -77,7 +50,7 @@ class _TeamCardState extends State<TeamCard> with TickerProviderStateMixin {
           width: 0.9 * _cardWidth,
           height: _leftPadding,
           decoration: BoxDecoration(
-            color: lightYellow,
+            color: Theme.of(context).primaryColor,
             borderRadius:
                 const BorderRadius.vertical(top: Radius.circular(10.0)),
           ),
@@ -94,18 +67,13 @@ class _TeamCardState extends State<TeamCard> with TickerProviderStateMixin {
         width: double.infinity,
         padding: const EdgeInsets.all(13.0),
         decoration: BoxDecoration(
-          color: lightPurple,
+          color: Theme.of(context).cardColor,
           borderRadius: BorderRadius.circular(20.0),
         ),
         child: Align(
           alignment: Alignment.bottomLeft,
-          child: Text(
-            widget._teamName,
-            style: Theme.of(context)
-                .textTheme
-                .labelMedium!
-                .copyWith(color: darkColor),
-          ),
+          child: Text(widget._teamName,
+              style: Theme.of(context).textTheme.labelMedium),
         ),
       ),
     );
@@ -128,14 +96,8 @@ class _TeamCardState extends State<TeamCard> with TickerProviderStateMixin {
       top: avatarPadding,
       child: CircleAvatar(
         maxRadius: _leftPadding - avatarPadding,
-        backgroundColor: lightPurple,
+        backgroundColor: Theme.of(context).primaryColor,
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _opacityController.dispose();
-    super.dispose();
   }
 }
