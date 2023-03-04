@@ -77,7 +77,6 @@ class TurnViewModel with ChangeNotifier {
 
   void endTurn() {
     _streamSink.add(_correctWords.length);
-    //_streamSink.close();
   }
 
   @override
