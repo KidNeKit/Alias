@@ -34,7 +34,7 @@ class TurnViewModel with ChangeNotifier {
     }
   }
 
-  void _refreshState() {
+  void refreshState() {
     _secondsLeft = _initialTurnTime;
     _wordIndex = 0;
     _isTurnBlocked = false;
@@ -45,7 +45,7 @@ class TurnViewModel with ChangeNotifier {
 
   void startTurn() {
     log('start turn');
-    _refreshState();
+    refreshState();
     _shownWords.add(currentWord);
     Timer.periodic(
       const Duration(seconds: 1),

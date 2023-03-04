@@ -6,7 +6,6 @@ import 'package:rxdart/subjects.dart';
 import '../models/enums/difficulty_level.dart';
 import '../models/enums/win_points.dart';
 import '../models/pack.dart';
-import '../models/team_memory.dart';
 import '../models/team_playing.dart';
 
 class GameViewModel with ChangeNotifier {
@@ -27,18 +26,15 @@ class GameViewModel with ChangeNotifier {
   }
 
   GameViewModel({
-    required List<TeamMemory> teams,
+    required List<TeamPlaying> teams,
     required Pack pack,
     required DifficultyLevel level,
     required WinPoints winPoints,
-  })  : _teams = teams.map((e) => TeamPlaying.fromTeam(e)).toList(),
+  })  : _teams = teams,
         _pack = pack,
         _level = level,
         _winPoints = winPoints {
-    _turn = 1;
-    _playingTeamIndex = 0;
-    _isGameEnded = false;
-    _isLastTurn = false;
+    setDefaultValues();
 
     turnResults.listen((value) {
       log('message received: $value');
@@ -62,6 +58,16 @@ class GameViewModel with ChangeNotifier {
       _pack!.levels.firstWhere((element) => element.level == level!).words;
 
   set setTurn(int turn) => _turn = turn;
+
+  void setDefaultValues() {
+    _turn = 1;
+    _playingTeamIndex = 0;
+    _isGameEnded = false;
+    _isLastTurn = false;
+    for (var e in _teams!) {
+      e.setPoints = 0;
+    }
+  }
 
   void increasePlayingTeamIndex() {
     if (_playingTeamIndex == teamQuantity - 1) {

@@ -12,14 +12,12 @@ class GameSettingsViewModel with ChangeNotifier {
   Pack? _selectedPack;
   DifficultyLevel? _level;
   WinPoints? _winPoints;
-  bool _isConfigured = false;
 
   int get teamQuantity => _teams.length;
   List<TeamMemory> get teams => _teams;
   Pack? get selectedPack => _selectedPack;
   DifficultyLevel? get level => _level;
   WinPoints? get winPoints => _winPoints;
-  bool get isConfigured => _isConfigured;
 
   set setPack(Pack? pack) {
     _selectedPack = pack;
@@ -82,7 +80,6 @@ class GameSettingsViewModel with ChangeNotifier {
       return false;
     }
     log('All fields are valid!');
-    _isConfigured = true;
     return true;
   }
 }

@@ -20,5 +20,12 @@ class TeamPlaying {
   String get teamName => _teamName;
   int get points => _points;
 
+  set setPoints(int points) => _points = points;
+
   void addPoints(int points) => _points += points;
+
+  @override
+  String toString() {
+    return 'teamName: $_teamName, points: $_points';
+  }
 }

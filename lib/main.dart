@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:alias/models/team_playing.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -36,16 +37,14 @@ class AliasApp extends StatelessWidget {
         ChangeNotifierProxyProvider<GameSettingsViewModel, GameViewModel>(
           create: (context) => GameViewModel.initial(),
           update: (context, value, previous) {
-            if (value.isConfigured) {
-              log('configured');
-              return GameViewModel(
-                teams: value.teams,
-                pack: value.selectedPack!,
-                level: value.level!,
-                winPoints: value.winPoints!,
-              );
-            }
-            return previous ?? GameViewModel.initial();
+            log('game settings changed');
+            return GameViewModel(
+              teams: value.teams.map((e) => TeamPlaying.fromTeam(e)).toList(),
+              pack: value.selectedPack!,
+              level: value.level!,
+              winPoints: value.winPoints!,
+            );
+            //return previous ?? GameViewModel.initial();
           },
         ),
         ChangeNotifierProxyProvider<GameViewModel, TurnViewModel>(
