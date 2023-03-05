@@ -38,14 +38,16 @@ class AliasApp extends StatelessWidget {
         ChangeNotifierProxyProvider<GameSettingsViewModel, GameViewModel>(
           create: (context) => GameViewModel.initial(),
           update: (context, value, previous) {
-            log('game settings changed');
+            log('{main:41} Previous state of GameViewModel: ${previous.toString()}');
+            if (previous != null && previous.isRequiredFieldsFilled()) {
+              return previous;
+            }
             return GameViewModel(
               teams: value.teams.map((e) => TeamPlaying.fromTeam(e)).toList(),
               pack: value.selectedPack!,
               level: value.level!,
               winPoints: value.winPoints!,
             );
-            //return previous ?? GameViewModel.initial();
           },
         ),
         ChangeNotifierProxyProvider<GameViewModel, TurnViewModel>(

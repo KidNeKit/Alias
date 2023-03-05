@@ -27,6 +27,7 @@ class CustomMediumTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       _text,
+      textAlign: TextAlign.center,
       style: Theme.of(context).textTheme.labelMedium!.copyWith(color: _color),
     );
   }

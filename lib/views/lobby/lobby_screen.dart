@@ -1,3 +1,5 @@
+import 'package:alias/views/global_components/text/custom_titles.dart';
+import 'package:alias/views/lobby/components/win_container.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -29,12 +31,13 @@ class LobbyScreen extends StatelessWidget {
             const TeamPoints(),
             const SizedBox(height: 10.0),
             const CurrentTurn(),
-            const Spacer(),
-            Consumer<GameViewModel>(
-              builder: (context, value, child) =>
-                  value.isGameEnded ? Container() : const PlayButton(),
+            Expanded(
+              child: Consumer<GameViewModel>(
+                builder: (context, value, child) => value.isGameEnded
+                    ? const WinContainer()
+                    : const PlayButton(),
+              ),
             ),
-            const Spacer(),
           ],
         ),
       ),

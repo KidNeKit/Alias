@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 
 import '../../global_components/text/custom_titles.dart';

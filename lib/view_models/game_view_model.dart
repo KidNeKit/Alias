@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:rxdart/subjects.dart';
@@ -14,10 +15,10 @@ class GameViewModel with ChangeNotifier {
   DifficultyLevel? _level;
   List<TeamPlaying>? _teams;
 
-  late int _turn;
-  late int _playingTeamIndex;
-  late bool _isGameEnded;
-  late bool _isLastTurn;
+  int _turn = 0;
+  int _playingTeamIndex = 0;
+  bool _isGameEnded = false;
+  bool _isLastTurn = false;
 
   PublishSubject turnResults = PublishSubject();
 
@@ -57,6 +58,11 @@ class GameViewModel with ChangeNotifier {
   List<String> get packWords =>
       _pack!.levels.firstWhere((element) => element.level == level!).words;
 
+  TeamPlaying get winner {
+    int maxPoints = _teams!.map((e) => e.points).reduce(math.max);
+    return _teams!.firstWhere((element) => element.points == maxPoints);
+  }
+
   set setTurn(int turn) => _turn = turn;
 
   void setDefaultValues() {
@@ -90,8 +96,24 @@ class GameViewModel with ChangeNotifier {
     }
   }
 
+  bool isRequiredFieldsFilled() {
+    return _winPoints != null &&
+        _level != null &&
+        _teams != null &&
+        _pack != null;
+  }
+
   @override
   String toString() {
-    return '';
+    return {
+      'winPoints': _winPoints,
+      'level': _level,
+      'teams': _teams,
+      'pack': _pack?.name ?? 'empty',
+      'turn': _turn,
+      'playingTeamIndex': _playingTeamIndex,
+      'isGameEnded': _isGameEnded,
+      'isLastTurn': _isLastTurn,
+    }.toString();
   }
 }

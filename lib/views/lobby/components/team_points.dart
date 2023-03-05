@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/team_playing.dart';
-import '../../../resources/colors.dart';
 import '../../../view_models/game_view_model.dart';
 import '../../global_components/text/custom_titles.dart';
 
@@ -17,7 +16,8 @@ class TeamPoints extends StatelessWidget {
           value.teamQuantity,
           (index) => TeamPointItem(
             team: value.teams[index],
-            isPlaying: value.teams[index] == value.playingTeam,
+            isPlaying:
+                value.teams[index] == value.playingTeam && !value.isGameEnded,
           ),
         ),
       ),
