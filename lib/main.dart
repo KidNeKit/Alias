@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:alias/models/team_playing.dart';
+import 'package:alias/view_models/word_position_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -56,6 +57,9 @@ class AliasApp extends StatelessWidget {
             }
             return previous ?? TurnViewModel();
           },
+        ),
+        ChangeNotifierProvider<WordPositionProvider>(
+          create: (context) => WordPositionProvider(),
         ),
       ],
       child: MaterialApp(

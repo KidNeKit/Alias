@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import '../../view_models/game_view_model.dart';
 import '../../view_models/turn_view_model.dart';
 import '../global_components/body_wrapper_animated.dart';
-import 'components/bottom_buttons.dart';
 import 'components/turn_timer.dart';
 import 'components/word_card.dart';
 
@@ -39,7 +38,7 @@ class _PlayScreenState extends State<PlayScreen> {
           children: const [
             TurnTimer(),
             WordCard(),
-            BottomButtons(),
+            //BottomButtons(),
           ],
         ),
       ),

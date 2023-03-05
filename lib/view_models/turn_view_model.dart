@@ -28,6 +28,7 @@ class TurnViewModel with ChangeNotifier {
 
   set setGameViewModel(GameViewModel? gameViewModel) {
     if (gameViewModel != null) {
+      _packWords.clear();
       _packWords.addAll([...gameViewModel.packWords]);
       _currentTeam = gameViewModel.playingTeam;
       _streamSink = gameViewModel.turnResults.sink;
@@ -46,6 +47,7 @@ class TurnViewModel with ChangeNotifier {
   void startTurn() {
     log('start turn');
     refreshState();
+    log(_packWords.toString());
     _shownWords.add(currentWord);
     Timer.periodic(
       const Duration(seconds: 1),
