@@ -62,6 +62,11 @@ class GameSettingsViewModel with ChangeNotifier {
     _teams.clear();
   }
 
+  void wipeGameSettings() {
+    wipePack();
+    wipeTeams();
+  }
+
   bool isTeamsValid() {
     return teamQuantity >= 2 && teamQuantity <= 4;
   }

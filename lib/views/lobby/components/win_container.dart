@@ -1,8 +1,11 @@
-import 'package:alias/view_models/game_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../view_models/game_settings_view_model.dart';
+import '../../../view_models/game_view_model.dart';
+import '../../../view_models/turn_view_model.dart';
 import '../../global_components/text/custom_titles.dart';
+import '../../home/home_screen.dart';
 
 class WinContainer extends StatelessWidget {
   const WinContainer({super.key});
@@ -21,34 +24,57 @@ class WinContainer extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                height: 50,
-                width: 50,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Theme.of(context).primaryColor,
-                ),
-                child: const Icon(
-                  Icons.close,
-                  color: Colors.white,
-                ),
+              ActionButton(
+                iconData: Icons.close,
+                onPressedFunc: () {
+                  Provider.of<GameViewModel>(context, listen: false)
+                      .setDefaultValues();
+                  Provider.of<TurnViewModel>(context, listen: false)
+                      .refreshState();
+                  Provider.of<GameSettingsViewModel>(context, listen: false)
+                      .wipeGameSettings();
+                  Navigator.of(context)
+                      .pushReplacementNamed(HomeScreen.routeName);
+                },
               ),
               const SizedBox(width: 20.0),
-              Container(
-                height: 50,
-                width: 50,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Theme.of(context).primaryColor,
-                ),
-                child: const Icon(
-                  Icons.replay,
-                  color: Colors.white,
-                ),
+              ActionButton(
+                iconData: Icons.replay,
+                onPressedFunc: () {},
               ),
             ],
           ),
         ],
+      ),
+    );
+  }
+}
+
+class ActionButton extends StatelessWidget {
+  final IconData _iconData;
+  final Function() _onPressedFunc;
+  const ActionButton(
+      {required IconData iconData,
+      required Function() onPressedFunc,
+      super.key})
+      : _iconData = iconData,
+        _onPressedFunc = onPressedFunc;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: _onPressedFunc,
+      child: Container(
+        height: 50,
+        width: 50,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: Theme.of(context).primaryColor,
+        ),
+        child: Icon(
+          _iconData,
+          color: Colors.white,
+        ),
       ),
     );
   }
