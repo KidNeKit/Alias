@@ -1,7 +1,8 @@
-import 'package:alias/resources/colors.dart';
-import 'package:alias/view_models/turn_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../../view_models/turn_view_model.dart';
+import '../../global_components/text/custom_titles.dart';
 
 class ResultHeader extends StatelessWidget {
   const ResultHeader({super.key});
@@ -12,10 +13,7 @@ class ResultHeader extends StatelessWidget {
       builder: (context, value, child) => Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Text(
-            '+${value.correctWords.length}',
-            style: Theme.of(context).textTheme.labelLarge,
-          ),
+          CustomLargeTitle(text: '+${value.correctWords.length}'),
         ],
       ),
     );

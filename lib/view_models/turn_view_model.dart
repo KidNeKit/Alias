@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'game_view_model.dart';
 
 class TurnViewModel with ChangeNotifier {
-  static const int _initialTurnTime = 60;
+  static const int _initialTurnTime = 10;
   final List<String> _packWords = [];
   final List<String> _shownWords = [];
   final List<String> _correctWords = [];
@@ -88,6 +88,15 @@ class TurnViewModel with ChangeNotifier {
   void endTurn() {
     _streamSink.add(_correctWords.length);
     refreshState();
+  }
+
+  void thumbUpPressed(String word) {
+    if (_correctWords.contains(word)) {
+      _correctWords.remove(word);
+    } else {
+      _correctWords.add(word);
+    }
+    notifyListeners();
   }
 
   @override
