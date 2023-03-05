@@ -3,11 +3,10 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 
-import '../models/team_playing.dart';
 import 'game_view_model.dart';
 
 class TurnViewModel with ChangeNotifier {
-  static const int _initialTurnTime = 10;
+  static const int _initialTurnTime = 60;
   final List<String> _packWords = [];
   final List<String> _shownWords = [];
   final List<String> _correctWords = [];
@@ -15,13 +14,13 @@ class TurnViewModel with ChangeNotifier {
   bool _isTurnBlocked = false;
   int _secondsLeft = _initialTurnTime;
   int _wordIndex = 0;
+  double _spendPercentage = 1.0;
 
-  late TeamPlaying _currentTeam;
   late Sink _streamSink;
 
   String get currentWord => _packWords[_wordIndex];
   int get secondsLeft => _secondsLeft;
-  double get secondsLeftPercentage => _secondsLeft / _initialTurnTime * 100;
+  double get spendPercentage => _spendPercentage;
   bool get isTurnBlocked => _isTurnBlocked;
   List<String> get correctWords => _correctWords;
   List<String> get shownWords => _shownWords;
@@ -30,13 +29,13 @@ class TurnViewModel with ChangeNotifier {
     if (gameViewModel != null) {
       _packWords.clear();
       _packWords.addAll([...gameViewModel.packWords]);
-      _currentTeam = gameViewModel.playingTeam;
       _streamSink = gameViewModel.turnResults.sink;
     }
   }
 
   void refreshState() {
     _secondsLeft = _initialTurnTime;
+    _spendPercentage = 1.0;
     _wordIndex = 0;
     _isTurnBlocked = false;
     _packWords.shuffle();
@@ -46,8 +45,6 @@ class TurnViewModel with ChangeNotifier {
 
   void startTurn() {
     log('start turn');
-    refreshState();
-    log(_packWords.toString());
     _shownWords.add(currentWord);
     Timer.periodic(
       const Duration(seconds: 1),
@@ -55,6 +52,17 @@ class TurnViewModel with ChangeNotifier {
         _secondsLeft--;
         if (_secondsLeft == 0) {
           _isTurnBlocked = true;
+          timer.cancel();
+        }
+        notifyListeners();
+      },
+    );
+    Timer.periodic(
+      const Duration(milliseconds: 100),
+      (timer) {
+        _spendPercentage =
+            (_initialTurnTime - (0.1 * timer.tick)) / _initialTurnTime;
+        if (_secondsLeft == 0) {
           timer.cancel();
         }
         notifyListeners();
@@ -79,6 +87,7 @@ class TurnViewModel with ChangeNotifier {
 
   void endTurn() {
     _streamSink.add(_correctWords.length);
+    refreshState();
   }
 
   @override

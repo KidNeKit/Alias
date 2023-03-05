@@ -20,7 +20,10 @@ class PlayScreen extends StatefulWidget {
 class _PlayScreenState extends State<PlayScreen> {
   @override
   void initState() {
-    Provider.of<TurnViewModel>(context, listen: false).startTurn();
+    Future.delayed(
+      const Duration(milliseconds: 500),
+      () => Provider.of<TurnViewModel>(context, listen: false).startTurn(),
+    );
     super.initState();
   }
 
