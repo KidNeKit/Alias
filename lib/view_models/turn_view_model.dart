@@ -45,6 +45,7 @@ class TurnViewModel with ChangeNotifier {
 
   void startTurn() {
     log('start turn');
+    refreshState();
     _shownWords.add(currentWord);
     Timer.periodic(
       const Duration(seconds: 1),

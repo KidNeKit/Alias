@@ -25,7 +25,7 @@ class TurnResultScreen extends StatelessWidget {
               Provider.of<TurnViewModel>(context, listen: false).endTurn();
               Navigator.of(context).pushReplacementNamed(LobbyScreen.routeName);
             },
-            child: const CustomMediumTitle(text: 'Continue'),
+            child: const CustomSmallTitle(text: 'Continue'),
           ),
         ],
       ),

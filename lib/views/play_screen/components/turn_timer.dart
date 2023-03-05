@@ -53,6 +53,13 @@ class _TurnTimerState extends State<TurnTimer> {
         children: [
           Container(
             height: 30,
+            width: percentage * _lineWidth,
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor,
+            ),
+          ),
+          Container(
+            height: 30,
             width: _lineWidth,
             decoration: BoxDecoration(
               border: Border.all(),
@@ -60,13 +67,6 @@ class _TurnTimerState extends State<TurnTimer> {
                 topLeft: Radius.circular(20.0),
                 bottomLeft: Radius.circular(20.0),
               ),
-            ),
-          ),
-          Container(
-            height: 30,
-            width: percentage * _lineWidth,
-            decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor,
             ),
           ),
         ],
