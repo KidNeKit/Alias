@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'dart:math' as math;
 
-import 'package:alias/repositories/teams_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/subjects.dart';
 
@@ -10,6 +9,7 @@ import '../models/enums/win_points.dart';
 import '../models/pack.dart';
 import '../models/team_memory.dart';
 import '../models/team_playing.dart';
+import '../repositories/teams_repository.dart';
 
 class GameViewModel with ChangeNotifier {
   WinPoints? _winPoints;
@@ -23,7 +23,7 @@ class GameViewModel with ChangeNotifier {
   bool _isLastTurn = false;
 
   PublishSubject turnResults = PublishSubject();
-  TeamsRepository _teamsRepository = TeamsRepository();
+  final TeamsRepository _teamsRepository = TeamsRepository();
 
   GameViewModel.initial() {
     log('created subscription');

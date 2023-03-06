@@ -31,7 +31,6 @@ class TeamsViewModel with ChangeNotifier {
 
   void wipeTeamChanges() {
     _team = null;
-    notifyListeners();
   }
 
   void changeTeamName(String name) {

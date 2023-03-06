@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../view_models/teams_view_model.dart';
 import '../global_components/body_wrapper.dart';
 import '../global_components/team_card.dart';
+import 'components/info_part.dart';
 
 class TeamInfoScreen extends StatefulWidget {
   static const String routeName = '/team_stats';
@@ -94,45 +95,13 @@ class _TeamInfoScreenState extends State<TeamInfoScreen>
                 visible: _isInitialized,
                 child: Opacity(
                   opacity: _opacityController.value,
-                  child: _isEditing ? _buildEditBody() : _buildInfoBody(),
+                  child: _isEditing ? _buildEditBody() : const InfoPart(),
                 ),
               ),
             ],
           ),
         ),
       ),
-    );
-  }
-
-  Widget _buildInfoBody() {
-    return Column(
-      children: [
-        Text(
-          'Info',
-          style: Theme.of(context).textTheme.labelMedium,
-        ),
-        const SizedBox(height: 10.0),
-        Text(
-          'Info',
-          style: Theme.of(context).textTheme.labelMedium,
-        ),
-        const SizedBox(height: 10.0),
-        Text(
-          'Info',
-          style: Theme.of(context).textTheme.labelMedium,
-        ),
-        const SizedBox(height: 10.0),
-        Text(
-          'Info',
-          style: Theme.of(context).textTheme.labelMedium,
-        ),
-        const SizedBox(height: 10.0),
-        Text(
-          'Info',
-          style: Theme.of(context).textTheme.labelMedium,
-        ),
-        const SizedBox(height: 10.0),
-      ],
     );
   }
 
