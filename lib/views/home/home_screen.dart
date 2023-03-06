@@ -17,8 +17,8 @@ class HomeScreen extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
         children: [
-          const Spacer(),
           const CustomLargeTitle(text: 'Welcome Back!'),
           const SizedBox(height: 15.0),
           CustomButton(
@@ -32,14 +32,13 @@ class HomeScreen extends StatelessWidget {
             onPressedFunc: () =>
                 Navigator.of(context).pushNamed(TeamsScreen.routeName),
           ),
-          const Spacer(),
-          Align(
-            alignment: Alignment.bottomRight,
-            child: Icon(
-              Icons.settings,
-              color: lightColor,
-            ),
-          ),
+          // Align(
+          //   alignment: Alignment.bottomRight,
+          //   child: Icon(
+          //     Icons.settings,
+          //     color: lightColor,
+          //   ),
+          // ),
         ],
       ),
     );

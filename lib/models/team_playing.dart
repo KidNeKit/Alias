@@ -1,4 +1,4 @@
-import 'package:alias/models/team_memory.dart';
+import 'team_memory.dart';
 
 class TeamPlaying {
   final String _teamId;
@@ -17,6 +17,7 @@ class TeamPlaying {
         _teamName = team.name,
         _points = 0;
 
+  String get id => _teamId;
   String get teamName => _teamName;
   int get points => _points;
 

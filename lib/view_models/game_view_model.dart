@@ -1,12 +1,14 @@
 import 'dart:developer';
 import 'dart:math' as math;
 
+import 'package:alias/repositories/teams_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/subjects.dart';
 
 import '../models/enums/difficulty_level.dart';
 import '../models/enums/win_points.dart';
 import '../models/pack.dart';
+import '../models/team_memory.dart';
 import '../models/team_playing.dart';
 
 class GameViewModel with ChangeNotifier {
@@ -21,6 +23,7 @@ class GameViewModel with ChangeNotifier {
   bool _isLastTurn = false;
 
   PublishSubject turnResults = PublishSubject();
+  TeamsRepository _teamsRepository = TeamsRepository();
 
   GameViewModel.initial() {
     log('created subscription');
@@ -89,11 +92,27 @@ class GameViewModel with ChangeNotifier {
         _playingTeamIndex = 0;
         _turn++;
       } else {
-        _isGameEnded = true;
+        _saveResults();
       }
     } else {
       _playingTeamIndex++;
     }
+  }
+
+  void _saveResults() async {
+    _isGameEnded = true;
+    TeamMemory teamWinner = await _teamsRepository.getTeamById(winner.id);
+    teamWinner.markAsWinner();
+    var savedWinner = await _teamsRepository.updateTeam(teamWinner);
+    log(savedWinner.toString());
+    [..._teams!]
+      ..removeWhere((element) => element.id == teamWinner.id)
+      ..forEach((element) async {
+        TeamMemory teamLoser = await _teamsRepository.getTeamById(element.id);
+        teamLoser.markAsLoser();
+        var savedLoser = await _teamsRepository.updateTeam(teamLoser);
+        log(savedLoser.toString());
+      });
   }
 
   bool isRequiredFieldsFilled() {
