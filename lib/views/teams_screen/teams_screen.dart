@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,6 +18,7 @@ class TeamsScreen extends StatelessWidget {
       body: FutureBuilder(
         future: Provider.of<TeamsViewModel>(context).getTeams(),
         builder: (context, snapshot) {
+          log('getting data in futurebuilder');
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
               child: CircularProgressIndicator(),
@@ -28,6 +31,7 @@ class TeamsScreen extends StatelessWidget {
               ),
             );
           }
+          log('rebuilding listview');
           return ListView.separated(
             itemCount: snapshot.data!.length,
             itemBuilder: (context, index) => GestureDetector(

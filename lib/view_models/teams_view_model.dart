@@ -23,6 +23,11 @@ class TeamsViewModel with ChangeNotifier {
     return await _teamsRepository.createTeam(_team!);
   }
 
+  Future<void> updateTeam() async {
+    await _teamsRepository.updateTeam(_team!);
+    notifyListeners();
+  }
+
   void setEditableTeam(String? teamId) async {
     _team = teamId == null
         ? TeamMemory.initial()

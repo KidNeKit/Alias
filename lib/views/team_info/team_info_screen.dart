@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../view_models/teams_view_model.dart';
 import '../global_components/body_wrapper.dart';
 import '../global_components/team_card.dart';
+import 'components/edit_part.dart';
 import 'components/info_part.dart';
 
 class TeamInfoScreen extends StatefulWidget {
@@ -79,7 +80,12 @@ class _TeamInfoScreenState extends State<TeamInfoScreen>
               Navigator.of(context).pop();
             });
           } else {
-            _opacityController.reverse().then((value) {
+            _opacityController.reverse().then((value) async {
+              if (_isEditing) {
+                await Provider.of<TeamsViewModel>(context, listen: false)
+                    .updateTeam();
+                log('updated');
+              }
               _isEditing = !_isEditing;
               Future.delayed(TeamInfoScreen.editSwapDuration,
                   () => _opacityController.forward());
@@ -90,55 +96,20 @@ class _TeamInfoScreenState extends State<TeamInfoScreen>
           tag: 'team_${widget._teamId}',
           child: Column(
             children: [
-              TeamCard(teamName: widget._teamName),
+              Consumer<TeamsViewModel>(
+                  builder: (context, value, child) =>
+                      TeamCard(teamName: value.team?.name ?? '')),
               Visibility(
                 visible: _isInitialized,
                 child: Opacity(
                   opacity: _opacityController.value,
-                  child: _isEditing ? _buildEditBody() : const InfoPart(),
+                  child: _isEditing ? const EditPart() : const InfoPart(),
                 ),
               ),
             ],
           ),
         ),
       ),
-    );
-  }
-
-  Widget _buildEditBody() {
-    return Column(
-      children: [
-        TextField(
-          onChanged: (value) =>
-              Provider.of<TeamsViewModel>(context, listen: false)
-                  .changeTeamName(value),
-        ),
-        Text(
-          'Edit',
-          style: Theme.of(context).textTheme.labelMedium,
-        ),
-        const SizedBox(height: 10.0),
-        Text(
-          'Edit',
-          style: Theme.of(context).textTheme.labelMedium,
-        ),
-        const SizedBox(height: 10.0),
-        Text(
-          'Edit',
-          style: Theme.of(context).textTheme.labelMedium,
-        ),
-        const SizedBox(height: 10.0),
-        Text(
-          'Edit',
-          style: Theme.of(context).textTheme.labelMedium,
-        ),
-        const SizedBox(height: 10.0),
-        Text(
-          'Edit',
-          style: Theme.of(context).textTheme.labelMedium,
-        ),
-        const SizedBox(height: 10.0),
-      ],
     );
   }
 
