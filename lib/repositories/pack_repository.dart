@@ -7,7 +7,6 @@ import '../models/pack.dart';
 class PackRepository {
   static const Set<String> _packNames = {
     'first',
-    'second',
     'footballers',
   };
 

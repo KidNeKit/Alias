@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'game_view_model.dart';
 
 class TurnViewModel with ChangeNotifier {
-  static const int _initialTurnTime = 10;
+  static const int _initialTurnTime = 20;
   final List<String> _packWords = [];
   final List<String> _shownWords = [];
   final List<String> _correctWords = [];
@@ -15,6 +15,9 @@ class TurnViewModel with ChangeNotifier {
   int _secondsLeft = _initialTurnTime;
   int _wordIndex = 0;
   double _spendPercentage = 1.0;
+
+  late Timer _secondsTimer;
+  late Timer _percentageTimer;
 
   late Sink _streamSink;
 
@@ -46,7 +49,7 @@ class TurnViewModel with ChangeNotifier {
   void startTurn() {
     log('start turn');
     _shownWords.add(currentWord);
-    Timer.periodic(
+    _secondsTimer = Timer.periodic(
       const Duration(seconds: 1),
       (timer) {
         _secondsLeft--;
@@ -57,7 +60,7 @@ class TurnViewModel with ChangeNotifier {
         notifyListeners();
       },
     );
-    Timer.periodic(
+    _percentageTimer = Timer.periodic(
       const Duration(milliseconds: 100),
       (timer) {
         _spendPercentage =
@@ -77,7 +80,14 @@ class TurnViewModel with ChangeNotifier {
 
   void nextWord() {
     if (!_isTurnBlocked) {
-      _wordIndex++;
+      if (_wordIndex == _packWords.length - 2) {
+        _isTurnBlocked = true;
+        _secondsTimer.cancel();
+        _percentageTimer.cancel();
+        notifyListeners();
+      } else {
+        _wordIndex++;
+      }
       _shownWords.add(currentWord);
       notifyListeners();
     } else {
